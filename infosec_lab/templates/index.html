@@ -475,7 +475,12 @@
                     </div>
                     
                     <div class="map-container">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2243.772721774102!2d37.70984731593184!3d55.78139798056091!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b5356c7e5a3a1d%3A0x8a1a0b1b0e1a3a2b!2z0JHQvtC70YzRiNCw0Y8g0J_QvtC70LjRgtC10YXQvdC40YfQtdGB0LrQuNC5INC_0LXRgC4sIDM4LCDQnNC-0YHQutCy0LAsINCc0L7RgdC60LLQsCwgMTA3MDc4!5e0!3m2!1sru!2sru!4v1620000000000!5m2!1sru!2sru" allowfullscreen="" loading="lazy"></iframe>
+                        <iframe
+                            src="https://yandex.ru/map-widget/v1/?ll=37.709847%2C55.781398&z=16"
+                            frameborder="0"
+                            style="position:absolute;top:0;left:0;width:100%;height:100%;"
+                            allowfullscreen>
+                        </iframe>
                     </div>
                 </div>
                 
@@ -744,50 +749,12 @@
         });
 
         // Load more news
-        document.getElementById('load-more-news').addEventListener('click', function() {
-            // In a real app, this would fetch more data from the server
-            const additionalNews = [
-                {
-                    id: 5,
-                    title: "Проведен семинар по современным методам криптографии",
-                    excerpt: "Ведущие специалисты отрасли обсудили последние тенденции в области защиты данных и шифрования.",
-                    date: "28.02.2023",
-                    image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-                },
-                {
-                    id: 6,
-                    title: "Запущена новая образовательная программа по кибербезопасности",
-                    excerpt: "С сентября 2023 года стартует магистерская программа с углубленным изучением методов защиты информации.",
-                    date: "15.01.2023",
-                    image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-                }
-            ];
-            renderNews([...newsData, ...additionalNews]);
-            this.style.display = 'none';
-        });
+        document.getElementById('load-more-news')
+        .addEventListener('click', () => newsUrl && loadNews(newsUrl));
 
-        // Load more publications
-        document.getElementById('load-more-pubs').addEventListener('click', function() {
-            // In a real app, this would fetch more data from the server
-            const additionalPubs = [
-                {
-                    id: 5,
-                    title: "Анализ эффективности современных антивирусных решений",
-                    authors: "Иванов А.С., Кузнецова О.И.",
-                    journal: "Безопасность информационных систем, 2021, Т.7, №3",
-                    link: "#"
-                },
-                {
-                    id: 6,
-                    title: "Методы защиты облачных хранилищ данных",
-                    authors: "Петрова Е.В., Сидоров П.М.",
-                    journal: "Облачные технологии, 2020, Т.12, №5",
-                    link: "#"
-                }
-            ];
-            renderPublications([...publicationsData, ...additionalPubs]);
-            this.style.display = 'none';
-        });
+        // Load more pubs
+        document.getElementById('load-more-pubs')
+        .addEventListener('click', () => pubsUrl && loadPubs(pubsUrl));
 
         // Mobile menu toggle
         document.querySelector('header button').addEventListener('click', function() {
@@ -827,32 +794,48 @@
             });
         });
 
+        let newsUrl = '/api/news/';   // текущая страница
+        let newsData = [];
+
+        function loadNews(url = newsUrl) {
+            fetch(url)
+                .then(r => r.json())
+                .then(data => {
+                    const list = Array.isArray(data) ? data : data.results || [];
+                    newsData = [...newsData, ...list];
+                    renderNews(newsData);
+
+                    newsUrl = data.next;   // DRF даёт next=null, когда страницы кончились
+                    document.getElementById('load-more-news')
+                            .style.display = newsUrl ? 'inline-block' : 'none';
+                })
+                .catch(console.error);
+        }
+
+        let pubsUrl = '/api/publications/';   // текущая страница публикаций
+        let pubsData = [];
+
+        function loadPubs(url = pubsUrl) {
+            fetch(url)
+                .then(r => r.json())
+                .then(data => {
+                    const list = Array.isArray(data) ? data : data.results || [];
+                    pubsData = [...pubsData, ...list];
+                    renderPublications(pubsData);
+
+                    pubsUrl = data.next;   // DRF вернёт null, когда страниц не останется
+                    document.getElementById('load-more-pubs')
+                            .style.display = pubsUrl ? 'inline-block' : 'none';
+                })
+                .catch(console.error);
+        }
 
         document.addEventListener('DOMContentLoaded', function() {
             renderStaff();
 
-            // Запрос списка новостей с API
-            fetch('/api/news/')
-            .then(r => r.json())
-            .then(data => renderNews(Array.isArray(data) ? data : data.results || []))
-            .catch(error => console.error('Ошибка загрузки новостей:', error));
-            
-
-            // Запрос списка публикаций с API
-            fetch('/api/publications/')
-            .then(response => response.json())
-            .then(pubList => {
-                renderPublications(pubList);  // отображаем публикации на странице
-            })
-            .catch(error => console.error('Ошибка загрузки публикаций:', error));
+            loadNews();
+            loadPubs();
         });
-
-        // Initialize the page
-        // document.addEventListener('DOMContentLoaded', function() {
-        //     loadNews();
-        //     renderStaff();
-        //     loadPublications();
-        // });
     </script>
 </body>
 </html>
