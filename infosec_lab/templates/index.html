@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Лаборатория информационной безопасности | Московский Политех</title>
+    <title>Лаборатории информационной безопасности | Московский Политех</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -53,7 +54,7 @@
     <header class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center">
-                <img src="https://mospolytech.ru/local/templates/main/assets/img/logo.svg" alt="Московский Политех" class="h-12">
+                <img src="{% static 'img/Logo_Polytech_rus_main.jpg' %}" alt="Московский Политех" class="h-12">
                 <div class="ml-4">
                     <h1 class="text-xl font-bold text-blue-900">Лаборатория информационной безопасности</h1>
                 </div>
@@ -338,32 +339,16 @@
                 <!-- Projects -->
                 <div>
                     <h4 class="text-2xl font-bold mb-6">Текущие проекты</h4>
-                    
-                    <div class="space-y-6">
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
-                            <h5 class="font-bold text-lg mb-2">Разработка системы обнаружения аномалий в сетевом трафике</h5>
-                            <p class="text-gray-700 mb-3">Использование методов машинного обучения для выявления скрытых угроз в корпоративных сетях.</p>
-                            <div class="flex justify-between items-center text-sm text-gray-500">
-                                <span>2022-2024</span>
-                                <span>Спонсор: Ростелеком</span>
-                            </div>
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
-                            <h5 class="font-bold text-lg mb-2">Криптографические протоколы для IoT устройств</h5>
-                            <p class="text-gray-700 mb-3">Исследование и разработка легковесных криптографических алгоритмов для устройств интернета вещей.</p>
-                            <div class="flex justify-between items-center text-sm text-gray-500">
-                                <span>2023-2025</span>
-                                <span>Спонсор: Роскосмос</span>
-                            </div>
-                        </div>
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
-                            <h5 class="font-bold text-lg mb-2">Платформа для обучения кибербезопасности</h5>
-                            <p class="text-gray-700 mb-3">Интерактивная среда для отработки навыков защиты информации и реагирования на инциденты.</p>
-                            <div class="flex justify-between items-center text-sm text-gray-500">
-                                <span>2023-2024</span>
-                                <span>Спонсор: Минцифры</span>
-                            </div>
-                        </div>
+
+                    <!-- контейнер для подгружаемых карточек -->
+                    <div class="space-y-6" id="projects-container"></div>
+
+                    <!-- кнопка «Показать больше» -->
+                    <div class="mt-6 text-center">
+                        <button id="load-more-projects"
+                                class="bg-blue-900 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+                            Показать больше
+                        </button>
                     </div>
                 </div>
                 
@@ -568,7 +553,7 @@
             </div>
             
             <div class="pt-6 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
-                <p>© 2025 Лаборатория информационной безопасности Московского Политеха</p>
+                <p>© 2025 Лаборатории информационной безопасности Московского Политеха</p>
                 <p class="mt-2 md:mt-0">Разработано студентами Московского Политеха</p>
             </div>
         </div>
@@ -653,14 +638,6 @@
             this.reset();
         });
 
-        // Load more news
-        document.getElementById('load-more-news')
-        .addEventListener('click', () => newsUrl && loadNews(newsUrl));
-
-        // Load more pubs
-        document.getElementById('load-more-pubs')
-        .addEventListener('click', () => pubsUrl && loadPubs(pubsUrl));
-
         // Mobile menu toggle
         document.querySelector('header button').addEventListener('click', function() {
             const nav = document.querySelector('header nav');
@@ -701,6 +678,10 @@
 
         // ────────────── NEWS ──────────────
 
+        // Load more news
+        document.getElementById('load-more-news')
+        .addEventListener('click', () => newsUrl && loadNews(newsUrl));
+
         let newsUrl = '/api/news/';   // текущая страница
         let newsData = [];
 
@@ -720,6 +701,10 @@
         }
 
         // ────────────── PUBS ──────────────
+
+        // Load more pubs
+        document.getElementById('load-more-pubs')
+        .addEventListener('click', () => pubsUrl && loadPubs(pubsUrl));
 
         let pubsUrl = '/api/publications/';   // текущая страница публикаций
         let pubsData = [];
@@ -754,10 +739,52 @@
             .catch(console.error);
     }
 
+    // ────────────── PROJECTS ──────────────
+        let projectsUrl  = "/api/projects/";
+        let projectsData = [];
+
+        function renderProjects(list) {
+            const box = document.getElementById("projects-container");
+            box.innerHTML = "";
+            list.forEach(p => {
+                box.insertAdjacentHTML("beforeend", `
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h5 class="font-bold text-lg mb-2">${p.title}</h5>
+                        <p class="text-gray-700 mb-2"><strong>Цель:</strong> ${p.goal}</p>
+                        ${p.result ? `<p class="text-gray-700 mb-2"><strong>Результат:</strong> ${p.result}</p>` : ""}
+                        <div class="flex justify-between items-center text-sm text-gray-500">
+                            <span>${p.start_year}${p.end_year ? "–" + p.end_year : ""}</span>
+                            <span>${p.sponsor || ""}</span>
+                        </div>
+                    </div>
+                `);
+            });
+        }
+
+        function loadProjects(url = projectsUrl) {
+            fetch(url)
+                .then(r => r.json())
+                .then(data => {
+                    const items = Array.isArray(data) ? data : (data.results || []);
+                    projectsData = [...projectsData, ...items];
+                    renderProjects(projectsData);
+
+                    projectsUrl = data.next;   // DRF pagination
+                    document.getElementById("load-more-projects")
+                            .style.display = projectsUrl ? "inline-block" : "none";
+                })
+                .catch(console.error);
+        }
+
+        
+        document.getElementById("load-more-projects")
+                .addEventListener("click", () => projectsUrl && loadProjects());
+
         document.addEventListener('DOMContentLoaded', function() {
             loadStaff();
             loadNews();
             loadPubs();
+            loadProjects();
         });
     </script>
 </body>

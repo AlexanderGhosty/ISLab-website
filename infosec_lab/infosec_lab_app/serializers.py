@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import News, Publication, Staff
+from .models import News, Publication, Staff, Project
 
 class NewsSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,4 +14,10 @@ class PublicationSerializer(serializers.ModelSerializer):
 class StaffSerializer(serializers.ModelSerializer):        # ← NEW
     class Meta:
         model  = Staff
+        fields = "__all__"
+
+
+class ProjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model  = Project
         fields = "__all__"
