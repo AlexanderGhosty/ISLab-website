@@ -1,7 +1,7 @@
 # infosec_lab_app/views.py
 from rest_framework import viewsets, permissions
-from .models import News, Publication
-from .serializers import NewsSerializer, PublicationSerializer
+from .models import News, Publication, Staff
+from .serializers import NewsSerializer, PublicationSerializer, StaffSerializer
 
 class NewsViewSet(viewsets.ReadOnlyModelViewSet):
     """
@@ -20,3 +20,14 @@ class PublicationViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Publication.objects.all().order_by("-id")
     serializer_class = PublicationSerializer
     permission_classes = [permissions.AllowAny]
+
+class StaffViewSet(viewsets.ReadOnlyModelViewSet): 
+    """
+    GET /api/staff/       → список сотрудников
+    GET /api/staff/{id}/  → один сотрудник
+    """
+    queryset           = Staff.objects.all()
+    serializer_class   = StaffSerializer
+    permission_classes = [permissions.AllowAny]
+    
+    pagination_class   = None 

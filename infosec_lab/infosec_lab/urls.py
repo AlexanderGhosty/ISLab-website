@@ -3,11 +3,12 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 from rest_framework.routers import DefaultRouter
 
-from infosec_lab_app.views import NewsViewSet, PublicationViewSet
+from infosec_lab_app.views import NewsViewSet, PublicationViewSet, StaffViewSet
 
 router = DefaultRouter()
 router.register(r'news', NewsViewSet, basename='news')
 router.register(r'publications', PublicationViewSet, basename='publication')
+router.register(r"staff", StaffViewSet, basename="staff")
 
 urlpatterns = [
     path('admin/', admin.site.urls),

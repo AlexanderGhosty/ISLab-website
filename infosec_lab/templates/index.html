@@ -575,102 +575,7 @@
     </footer>
 
     <script>
-        // Sample data for news
-        // const newsData = [
-        //     {
-        //         id: 1,
-        //         title: "Лаборатория выиграла грант на исследование AI в кибербезопасности",
-        //         excerpt: "Наш проект по использованию искусственного интеллекта для обнаружения угроз получил финансирование от Минцифры.",
-        //         date: "15.06.2023",
-        //         image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=765&q=80"
-        //     },
-        //     {
-        //         id: 2,
-        //         title: "Студенты лаборатории заняли первое место на CTF-соревнованиях",
-        //         excerpt: "Наша команда победила в национальном чемпионате по информационной безопасности, обойдя 30 университетских команд.",
-        //         date: "03.05.2023",
-        //         image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-        //     },
-        //     {
-        //         id: 3,
-        //         title: "Открыт набор студентов для участия в летней школе по кибербезопасности",
-        //         excerpt: "Приглашаем студентов 2-4 курсов принять участие в интенсивной программе обучения с 10 по 30 июля.",
-        //         date: "22.04.2023",
-        //         image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80"
-        //     },
-        //     {
-        //         id: 4,
-        //         title: "Подписано соглашение о сотрудничестве с Kaspersky Lab",
-        //         excerpt: "Компания станет технологическим партнером лаборатории и предоставит доступ к своим решениям для исследований.",
-        //         date: "10.03.2023",
-        //         image: "https://images.unsplash.com/photo-1600880292203-75771f0a2117?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-        //     }
-        // ];
-
-        // Sample data for staff
-        const staffData = [
-            {
-                id: 1,
-                name: "Иванов А.С.",
-                position: "Руководитель лаборатории",
-                bio: "Доктор технических наук, профессор. Автор более 50 научных работ по информационной безопасности.",
-                image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
-            },
-            {
-                id: 2,
-                name: "Петрова Е.В.",
-                position: "Ведущий научный сотрудник",
-                bio: "Кандидат технических наук. Специалист в области криптографии и стеганографии.",
-                image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
-            },
-            {
-                id: 3,
-                name: "Сидоров П.М.",
-                position: "Старший преподаватель",
-                bio: "Эксперт в области сетевой безопасности и анализа уязвимостей. Руководитель CTF-команды.",
-                image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
-            },
-            {
-                id: 4,
-                name: "Кузнецова О.И.",
-                position: "Научный сотрудник",
-                bio: "Специалист в области искусственного интеллекта и машинного обучения для кибербезопасности.",
-                image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
-            }
-        ];
-
-        // Sample data for publications
-        // const publicationsData = [
-        //     {
-        //         id: 1,
-        //         title: "Новый метод обнаружения аномалий в сетевом трафике на основе глубокого обучения",
-        //         authors: "Иванов А.С., Петрова Е.В., Сидоров П.М.",
-        //         journal: "Журнал информационной безопасности, 2023, Т.15, №2",
-        //         link: "#"
-        //     },
-        //     {
-        //         id: 2,
-        //         title: "Анализ уязвимостей IoT устройств и методы их защиты",
-        //         authors: "Сидоров П.М., Кузнецова О.И.",
-        //         journal: "Труды конференции по кибербезопасности, 2022",
-        //         link: "#"
-        //     },
-        //     {
-        //         id: 3,
-        //         title: "Применение блокчейн-технологий для защиты медицинских данных",
-        //         authors: "Петрова Е.В., Иванов А.С.",
-        //         journal: "Информационные технологии в медицине, 2022, Т.8, №4",
-        //         link: "#"
-        //     },
-        //     {
-        //         id: 4,
-        //         title: "Методы противодействия фишинговым атакам с использованием машинного обучения",
-        //         authors: "Кузнецова О.И., Сидоров П.М.",
-        //         journal: "Кибербезопасность и защита данных, 2021, Т.3, №1",
-        //         link: "#"
-        //     }
-        // ];
-
+        
         // Render news
         function renderNews(newsToRender) {
             const newsContainer = document.getElementById('news-container');
@@ -794,6 +699,8 @@
             });
         });
 
+        // ────────────── NEWS ──────────────
+
         let newsUrl = '/api/news/';   // текущая страница
         let newsData = [];
 
@@ -811,6 +718,8 @@
                 })
                 .catch(console.error);
         }
+
+        // ────────────── PUBS ──────────────
 
         let pubsUrl = '/api/publications/';   // текущая страница публикаций
         let pubsData = [];
@@ -830,9 +739,23 @@
                 .catch(console.error);
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            renderStaff();
+        // ────────────── STAFF ──────────────
 
+        let staffUrl  = "/api/staff/";
+        let staffData = [];
+
+        function loadStaff() {
+        fetch('/api/staff/')
+            .then(r => r.json())
+            .then(data => {
+                staffData = data;
+                renderStaff(staffData);
+            })
+            .catch(console.error);
+    }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadStaff();
             loadNews();
             loadPubs();
         });
