@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+{% load static %}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Новость | Лаборатория ИБ Московского Политеха</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    /* доп. градиент как на главной */
+    .hero-gradient {
+      background: linear-gradient(135deg, #003366 0%, #0066cc 100%);
+    }
+    /* для длинного HTML‑контента статьи */
+    .prose img {
+      @apply mx-auto rounded-lg shadow;
+    }
+  </style>
+</head>
+<body class="font-sans text-gray-800">
+  <!-- Header (ре‑юзаем код из index.html) -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center">
+        <img src="{% static 'img/Logo_Polytech_rus_main.jpg' %}" alt="Московский Политех" class="h-12" />
+        <div class="ml-4">
+          <a href="/" class="text-xl font-bold text-blue-900 hover:text-blue-700 transition">Лаборатория информационной безопасности</a>
+        </div>
+      </div>
+      <a href="/" class="hidden md:inline-block text-blue-900 hover:text-blue-700 transition"><i class="fas fa-arrow-left mr-1"></i> На главную</a>
+    </div>
+  </header>
+
+  <!-- News Detail -->
+  <main class="py-16 bg-gray-50" id="news-wrapper">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <div id="loading" class="text-center text-blue-900 py-12">
+        Загрузка...
+      </div>
+
+      <article id="news-article" class="hidden">
+        <h1 id="news-title" class="text-3xl md:text-4xl font-bold text-blue-900 mb-4"></h1>
+        <time id="news-date" class="block text-gray-500 mb-6"></time>
+
+        <!-- главное изображение -->
+        <img id="news-main-image" src="" alt="" class="w-full aspect-[4/3] object-cover rounded-lg shadow mb-8" />
+
+        <!-- текст статьи → innerHTML -->
+        <div id="news-content" class="prose lg:prose-lg max-w-none mb-12"></div>
+
+        <!-- Gallery -->
+        <div id="gallery-wrapper" class="mb-12 hidden">
+          <h2 class="text-2xl font-bold mb-6">Фотогалерея</h2>
+          <div id="news-gallery" class="grid sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
+        </div>
+
+        <a href="/" class="inline-flex items-center text-blue-900 hover:text-blue-700 transition"><i class="fas fa-arrow-left mr-2"></i>Назад к новостям</a>
+      </article>
+    </div>
+  </main>
+
+  <script>
+    /**
+     * Получаем ID новости из URL. Ожидается путь вида /news/<id>/.
+     * Для Django‑шаблонов ID можно также передать в контекст переменной «news_id».
+     */
+    const NEWS_ID = (function () {
+      const parts = window.location.pathname.split('/').filter(Boolean);
+      return parts[parts.length - 1];
+    })();
+
+    if (!NEWS_ID) {
+      document.getElementById('loading').textContent = 'Некорректный URL новости.';
+    } else {
+      fetch(`/api/news/${NEWS_ID}/`)
+        .then((r) => {
+          if (!r.ok) throw new Error(r.status);
+          return r.json();
+        })
+        .then(renderNews)
+        .catch((err) => {
+          console.error(err);
+          document.getElementById('loading').textContent = 'Не удалось загрузить новость.';
+        });
+    }
+
+    function renderNews(data) {
+      // заголовок, дата, главное изображение
+      document.getElementById('news-title').textContent = data.title;
+      document.getElementById('news-date').textContent = new Date(data.date).toLocaleDateString('ru-RU', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      });
+      document.getElementById('news-main-image').src = data.image;
+      document.getElementById('news-main-image').alt = data.title;
+
+      // полный HTML‑контент (считаем, что backend отдаёт безопасный HTML)
+      document.getElementById('news-content').innerHTML = data.content;
+
+      // галерея (data.gallery – массив URL‑ов, макс. 20 изображений)
+      if (Array.isArray(data.gallery) && data.gallery.length) {
+        const galleryBox = document.getElementById('news-gallery');
+        data.gallery.slice(0, 20).forEach((item) => {
+            const img = document.createElement('img');
+            img.src = item.image;        // теперь — строка с правильным URL
+            img.alt = data.title;
+            img.className = 'w-full aspect-[4/3] object-cover rounded-lg shadow';
+            galleryBox.appendChild(img);
+        });
+        document.getElementById('gallery-wrapper').classList.remove('hidden');
+      }
+
+      // показать статью, убрать прелоадер
+      document.getElementById('loading').remove();
+      document.getElementById('news-article').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>

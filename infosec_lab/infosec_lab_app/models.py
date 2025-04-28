@@ -53,3 +53,18 @@ class Project(models.Model):
     def __str__(self):
         return self.title
 
+class NewsImage(models.Model):
+    news  = models.ForeignKey(
+        News,
+        related_name="images",
+        on_delete=models.CASCADE,
+        verbose_name="Новость",
+    )
+    image = models.ImageField("Файл изображения", upload_to="news_images/extra/")
+
+    class Meta:
+        ordering = ["id"]
+
+    def __str__(self):
+        return f"Image for {self.news.title}"
+

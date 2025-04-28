@@ -1,10 +1,16 @@
 # infosec_lab_app/admin.py
 from django.contrib import admin
-from .models import News, Publication, Staff, Project
+from .models import News, Publication, Staff, Project, NewsImage
+
+class NewsImageInline(admin.TabularInline):
+    model = NewsImage
+    extra = 1
+    max_num = 20
 
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
     list_display = ("title", "date")
+    inlines       = (NewsImageInline,)
     search_fields = ("title",)
     list_filter = ("date",)
 

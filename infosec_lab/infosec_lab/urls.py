@@ -15,9 +15,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),        # Подключение маршрутов API /api/news/ и /api/publications/
     path('', TemplateView.as_view(template_name='index.html'), name='index'),  # Главная страница
+    path("news/<int:id>/", TemplateView.as_view(template_name="news_detail.html"),
+         name="news_detail"),
 ]
 
-# В режиме DEBUG раздаём медиа-файлы (загруженные изображения) через Django:
 from django.conf import settings
 from django.conf.urls.static import static
 if settings.DEBUG:
