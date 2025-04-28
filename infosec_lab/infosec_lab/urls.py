@@ -13,7 +13,7 @@ router.register(r"projects", ProjectViewSet, basename="project")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),        # Подключение маршрутов API /api/news/ и /api/publications/
+    path('api/', include(router.urls)),
     path('', TemplateView.as_view(template_name='index.html'), name='index'),  # Главная страница
     path("news/<int:id>/", TemplateView.as_view(template_name="news_detail.html"),
          name="news_detail"),

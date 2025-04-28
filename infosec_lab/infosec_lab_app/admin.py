@@ -19,7 +19,7 @@ class PublicationAdmin(admin.ModelAdmin):
     list_display = ("title", "journal")
     search_fields = ("title", "authors", "journal")
 
-@admin.register(Staff)                            # ← NEW
+@admin.register(Staff)
 class StaffAdmin(admin.ModelAdmin):
     list_display  = ("name", "position")
     search_fields = ("name", "position")

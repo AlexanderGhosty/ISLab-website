@@ -18,7 +18,7 @@ class PublicationSerializer(serializers.ModelSerializer):
         model = Publication
         fields = '__all__'  # ['id', 'title', 'authors', 'journal', 'link']
 
-class StaffSerializer(serializers.ModelSerializer):        # ← NEW
+class StaffSerializer(serializers.ModelSerializer):
     class Meta:
         model  = Staff
         fields = "__all__"

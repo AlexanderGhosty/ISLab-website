@@ -8,11 +8,9 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
-    /* доп. градиент как на главной */
     .hero-gradient {
       background: linear-gradient(135deg, #003366 0%, #0066cc 100%);
     }
-    /* для длинного HTML‑контента статьи */
     .prose img {
       @apply mx-auto rounded-lg shadow;
     }
@@ -61,10 +59,6 @@
   </main>
 
   <script>
-    /**
-     * Получаем ID новости из URL. Ожидается путь вида /news/<id>/.
-     * Для Django‑шаблонов ID можно также передать в контекст переменной «news_id».
-     */
     const NEWS_ID = (function () {
       const parts = window.location.pathname.split('/').filter(Boolean);
       return parts[parts.length - 1];
@@ -96,7 +90,6 @@
       document.getElementById('news-main-image').src = data.image;
       document.getElementById('news-main-image').alt = data.title;
 
-      // полный HTML‑контент (считаем, что backend отдаёт безопасный HTML)
       document.getElementById('news-content').innerHTML = data.content;
 
       // галерея (data.gallery – массив URL‑ов, макс. 20 изображений)
@@ -104,7 +97,7 @@
         const galleryBox = document.getElementById('news-gallery');
         data.gallery.slice(0, 20).forEach((item) => {
             const img = document.createElement('img');
-            img.src = item.image;        // теперь — строка с правильным URL
+            img.src = item.image;       
             img.alt = data.title;
             img.className = 'w-full aspect-[4/3] object-cover rounded-lg shadow';
             galleryBox.appendChild(img);
@@ -112,7 +105,6 @@
         document.getElementById('gallery-wrapper').classList.remove('hidden');
       }
 
-      // показать статью, убрать прелоадер
       document.getElementById('loading').remove();
       document.getElementById('news-article').classList.remove('hidden');
     }
