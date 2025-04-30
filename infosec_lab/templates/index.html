@@ -66,31 +66,41 @@
 </head>
 <body class="font-sans text-gray-800">
     <!-- Header -->
-    <header  class="sticky top-0 z-50 h-16 backdrop-blur-md bg-white/70 border-b border-white/30 shadow-sm">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center">
-                <img src="{% static 'img/polytech_logo_main_RGB.png' %}" alt="Московский Политех" class="h-12">
-                <div class="ml-4">
-                    <h1 class="text-xl font-bold text-primary-900">Лаборатория информационной безопасности</h1>
-                </div>
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/70 border-b border-white/30 shadow-sm">
+        <div class="container mx-auto flex flex-wrap lg:flex-nowrap items-center justify-between gap-4 px-4 py-3">
+            <div class="flex items-center min-w-0">
+                <!-- Mobile logo (small without text) -->
+                <img src="{% static 'img/polytech_logo_main_RGB_small.png' %}"
+                    class="h-10 flex-shrink-0 lg:hidden"
+                    alt="Московский Политех (compact)">
+                <!-- Desktop logo (Full with text) -->
+                <img src="{% static 'img/polytech_logo_main_RGB.png' %}"
+                    class="h-12 flex-shrink-0 hidden lg:block"
+                    alt="Московский Политех">
+                <h1 class="ml-4 font-bold leading-tight text-base sm:text-lg lg:text-xl">
+                    Лаборатория <span class="block sm:inline">информационной</span> безопасности
+                </h1>
             </div>
-            <nav class="hidden md:block">
-                <ul class="flex space-x-8">
-                    <li><a href="#about" class="text-primary-900 hover:text-primary-700 transition">О лаборатории</a></li>
-                    <li><a href="#activities" class="text-primary-900 hover:text-primary-700 transition">Направления</a></li>
-                    <li><a href="#resources" class="text-primary-900 hover:text-primary-700 transition">Ресурсы</a></li>
-                    <li><a href="#projects" class="text-primary-900 hover:text-primary-700 transition">Проекты</a></li>
-                    <li><a href="#students" class="text-primary-900 hover:text-primary-700 transition">Студентам</a></li>
-                    <li><a href="#contacts" class="text-primary-900 hover:text-primary-700 transition">Контакты</a></li>
-                </ul>
-            </nav>
-            <!-- Burger (mobile) -->
-            <button class="md:hidden inline-flex items-center justify-center
-                   w-10 h-10 rounded-lg hover:bg-primary-900/5 transition">
+
+    <!-- Navigation -->
+    <nav class="hidden lg:block">
+      <ul class="flex flex-wrap gap-x-6 gap-y-2 whitespace-nowrap">
+        <li><a href="#about"       class="navlink">О лаборатории</a></li>
+        <li><a href="#activities"  class="navlink">Направления</a></li>
+        <li><a href="#resources"   class="navlink">Ресурсы</a></li>
+        <li><a href="#projects"    class="navlink">Проекты</a></li>
+        <li><a href="#students"    class="navlink">Студентам</a></li>
+        <li><a href="#contacts"    class="navlink">Контакты</a></li>
+      </ul>
+    </nav>
+
+    <!-- Burger -->
+    <button class="lg:hidden w-10 h-10 inline-flex items-center justify-center
+                   rounded-lg hover:bg-primary-900/5 transition">
       <i class="fas fa-bars text-xl"></i>
     </button>
-        </div>
-    </header>
+  </div>
+</header>
 
     <!-- Hero Section -->
     <section class="hero-gradient text-white py-20">

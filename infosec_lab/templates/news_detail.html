@@ -33,15 +33,23 @@
 </head>
 <body class="font-sans text-gray-800">
   <!-- Header (ре‑юзаем код из index.html) -->
-  <header  class="sticky top-0 z-50 h-16 backdrop-blur-md bg-white/70 border-b border-white/30 shadow-sm">
-    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-      <div class="flex items-center">
-        <img src="{% static 'img/polytech_logo_main_RGB.png' %}" alt="Московский Политех" class="h-12" />
-        <div class="ml-4">
-          <a href="/" class="text-xl font-bold text-primary-900 hover:text-primary-700 transition">Лаборатория информационной безопасности</a>
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-white/70 border-b border-white/30 shadow-sm">
+    <div class="container mx-auto flex flex-wrap lg:flex-nowrap items-center justify-between gap-4 px-4 py-3">
+        <div class="flex items-center min-w-0">
+            <!-- Mobile logo (small without text) -->
+            <img src="{% static 'img/polytech_logo_main_RGB_small.png' %}"
+                class="h-10 flex-shrink-0 lg:hidden"
+                alt="Московский Политех (compact)">
+            <!-- Desktop logo (Full with text) -->
+            <img src="{% static 'img/polytech_logo_main_RGB.png' %}"
+                class="h-12 flex-shrink-0 hidden lg:block"
+                alt="Московский Политех">
+            <h1 class="ml-4 font-bold leading-tight text-base sm:text-lg lg:text-xl">
+                Лаборатория <span class="block sm:inline">информационной</span> безопасности
+            </h1>
         </div>
-      </div>
-      <a href="/" class="hidden md:inline-block text-primary-900 hover:text-primary-700 transition"><i class="fas fa-arrow-left mr-1"></i> На главную</a>
+      <a href="/" class="inline-block text-primary-900 hover:text-primary-700 transition">
+        <i class="fas fa-arrow-left mr-1"></i> На главную</a>
     </div>
   </header>
 
