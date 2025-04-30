@@ -6,10 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Лаборатории информационной безопасности | Московский Политех</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                "primary-900":  "#0A132E",  // глубокий Navy
+                "primary-700":  "#1E3A8A",
+                "accent":       "#00D1FF",  // CyberCyan
+                "accent-light": "#67E8F9",
+                "lime-400":     "#A3E635"   // для call-outs
+              }
+            }
+          }
+        }
+      </script>      
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .hero-gradient {
-            background: linear-gradient(135deg, #003366 0%, #0066cc 100%);
+            background: linear-gradient(135deg, #0A132E 0%, #1E3A8A 100%);
         }
         .section-title {
             position: relative;
@@ -22,7 +37,7 @@
             left: 0;
             width: 60%;
             height: 3px;
-            background: #0066cc;
+            background: #00D1FF; /* accent */;
         }
         .news-card:hover {
             transform: translateY(-5px);
@@ -51,27 +66,29 @@
 </head>
 <body class="font-sans text-gray-800">
     <!-- Header -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
+    <header  class="sticky top-0 z-50 h-16 backdrop-blur-md bg-white/70 border-b border-white/30 shadow-sm">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center">
-                <img src="{% static 'img/Logo_Polytech_rus_main.jpg' %}" alt="Московский Политех" class="h-12">
+                <img src="{% static 'img/polytech_logo_main_RGB.png' %}" alt="Московский Политех" class="h-12">
                 <div class="ml-4">
-                    <h1 class="text-xl font-bold text-blue-900">Лаборатория информационной безопасности</h1>
+                    <h1 class="text-xl font-bold text-primary-900">Лаборатория информационной безопасности</h1>
                 </div>
             </div>
             <nav class="hidden md:block">
                 <ul class="flex space-x-8">
-                    <li><a href="#about" class="text-blue-900 hover:text-blue-600 transition">О лаборатории</a></li>
-                    <li><a href="#activities" class="text-blue-900 hover:text-blue-600 transition">Направления</a></li>
-                    <li><a href="#resources" class="text-blue-900 hover:text-blue-600 transition">Ресурсы</a></li>
-                    <li><a href="#projects" class="text-blue-900 hover:text-blue-600 transition">Проекты</a></li>
-                    <li><a href="#students" class="text-blue-900 hover:text-blue-600 transition">Студентам</a></li>
-                    <li><a href="#contacts" class="text-blue-900 hover:text-blue-600 transition">Контакты</a></li>
+                    <li><a href="#about" class="text-primary-900 hover:text-primary-700 transition">О лаборатории</a></li>
+                    <li><a href="#activities" class="text-primary-900 hover:text-primary-700 transition">Направления</a></li>
+                    <li><a href="#resources" class="text-primary-900 hover:text-primary-700 transition">Ресурсы</a></li>
+                    <li><a href="#projects" class="text-primary-900 hover:text-primary-700 transition">Проекты</a></li>
+                    <li><a href="#students" class="text-primary-900 hover:text-primary-700 transition">Студентам</a></li>
+                    <li><a href="#contacts" class="text-primary-900 hover:text-primary-700 transition">Контакты</a></li>
                 </ul>
             </nav>
-            <button class="md:hidden text-blue-900">
-                <i class="fas fa-bars text-2xl"></i>
-            </button>
+            <!-- Burger (mobile) -->
+            <button class="md:hidden inline-flex items-center justify-center
+                   w-10 h-10 rounded-lg hover:bg-primary-900/5 transition">
+      <i class="fas fa-bars text-xl"></i>
+    </button>
         </div>
     </header>
 
@@ -82,8 +99,8 @@
                 <h2 class="text-4xl md:text-5xl font-bold mb-6">Исследования и разработки в области кибербезопасности</h2>
                 <p class="text-xl mb-8">Лаборатория информационной безопасности Московского Политеха занимается передовыми исследованиями в области защиты данных, криптографии и анализа уязвимостей.</p>
                 <div class="flex space-x-4">
-                    <a href="#contacts" class="bg-white text-blue-900 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition">Связаться с нами</a>
-                    <a href="#about" class="border-2 border-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-blue-900 transition">Узнать больше</a>
+                    <a href="#contacts" class="bg-white text-primary-900 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition">Связаться с нами</a>
+                    <a href="#about" class="border-2 border-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-primary-900 transition">Узнать больше</a>
                 </div>
             </div>
         </div>
@@ -100,7 +117,7 @@
                         <!-- News will be loaded here by JavaScript -->
                     </div>
                     <div class="mt-8 text-center">
-                        <button id="load-more-news" class="bg-blue-900 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">Показать больше</button>
+                        <button id="load-more-news" class="bg-primary-900 text-white px-6 py-2 rounded-lg hover:bg-primary-700 transition">Показать больше</button>
                     </div>
                 </div>
                 
@@ -109,28 +126,28 @@
                     <h3 class="text-2xl font-bold mb-6 section-title">Контакты</h3>
                     <div class="bg-white p-6 rounded-lg shadow-md">
                         <div class="mb-4 flex items-start">
-                            <i class="fas fa-map-marker-alt text-blue-900 mt-1 mr-3"></i>
+                            <i class="fas fa-map-marker-alt text-primary-900 mt-1 mr-3"></i>
                             <div>
                                 <h4 class="font-medium">Адрес</h4>
                                 <p class="text-gray-600">г. Москва, ул. Автозаводская, 16</p>
                             </div>
                         </div>
                         <div class="mb-4 flex items-start">
-                            <i class="fas fa-phone-alt text-blue-900 mt-1 mr-3"></i>
+                            <i class="fas fa-phone-alt text-primary-900 mt-1 mr-3"></i>
                             <div>
                                 <h4 class="font-medium">Телефон</h4>
                                 <p class="text-gray-600">+7 (495) 223-05-23</p>
                             </div>
                         </div>
                         <div class="mb-4 flex items-start">
-                            <i class="fas fa-envelope text-blue-900 mt-1 mr-3"></i>
+                            <i class="fas fa-envelope text-primary-900 mt-1 mr-3"></i>
                             <div>
                                 <h4 class="font-medium">Email</h4>
                                 <p class="text-gray-600">cybersec@mospolytech.ru</p>
                             </div>
                         </div>
                         <div class="flex items-start">
-                            <i class="fas fa-clock text-blue-900 mt-1 mr-3"></i>
+                            <i class="fas fa-clock text-primary-900 mt-1 mr-3"></i>
                             <div>
                                 <h4 class="font-medium">Часы работы</h4>
                                 <p class="text-gray-600">Пн-Пт: 9:00 - 18:00</p>
@@ -160,18 +177,18 @@
             </div>
             
             <!-- Goals -->
-            <div class="bg-blue-50 p-8 rounded-lg mb-16">
+            <div class="bg-gray-50 p-8 rounded-lg mb-16">
                 <h4 class="text-2xl font-bold mb-6">Цели и задачи</h4>
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <div class="text-blue-900 mb-3">
+                        <div class="text-primary-900 mb-3">
                             <i class="fas fa-bullseye text-2xl"></i>
                         </div>
                         <h5 class="font-bold mb-2">Основная цель</h5>
                         <p class="text-gray-700">Создание безопасной цифровой среды через фундаментальные и прикладные исследования в области информационной безопасности.</p>
                     </div>
                     <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <div class="text-blue-900 mb-3">
+                        <div class="text-primary-900 mb-3">
                             <i class="fas fa-tasks text-2xl"></i>
                         </div>
                         <h5 class="font-bold mb-2">Наши задачи</h5>
@@ -202,7 +219,7 @@
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Research -->
                 <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
-                    <div class="text-blue-900 mb-4 text-4xl">
+                    <div class="text-primary-900 mb-4 text-4xl">
                         <i class="fas fa-flask"></i>
                     </div>
                     <h4 class="text-xl font-bold mb-3">Научные исследования</h4>
@@ -217,7 +234,7 @@
                 
                 <!-- Education -->
                 <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
-                    <div class="text-blue-900 mb-4 text-4xl">
+                    <div class="text-primary-900 mb-4 text-4xl">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
                     <h4 class="text-xl font-bold mb-3">Образовательные программы</h4>
@@ -232,7 +249,7 @@
                 
                 <!-- Consulting -->
                 <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
-                    <div class="text-blue-900 mb-4 text-4xl">
+                    <div class="text-primary-900 mb-4 text-4xl">
                         <i class="fas fa-briefcase"></i>
                     </div>
                     <h4 class="text-xl font-bold mb-3">Консалтинговые услуги</h4>
@@ -269,8 +286,8 @@
                     
                     <div class="space-y-4">
                         <div class="flex items-start">
-                            <div class="bg-blue-100 p-2 rounded-full mr-4">
-                                <i class="fas fa-server text-blue-900"></i>
+                            <div class="bg-accent-light p-2 rounded-full mr-4">
+                                <i class="fas fa-server text-primary-900"></i>
                             </div>
                             <div>
                                 <h5 class="font-bold">Вычислительные мощности</h5>
@@ -278,8 +295,8 @@
                             </div>
                         </div>
                         <div class="flex items-start">
-                            <div class="bg-blue-100 p-2 rounded-full mr-4">
-                                <i class="fas fa-shield-alt text-blue-900"></i>
+                            <div class="bg-accent-light p-2 rounded-full mr-4">
+                                <i class="fas fa-shield-alt text-primary-900"></i>
                             </div>
                             <div>
                                 <h5 class="font-bold">Средства защиты</h5>
@@ -287,8 +304,8 @@
                             </div>
                         </div>
                         <div class="flex items-start">
-                            <div class="bg-blue-100 p-2 rounded-full mr-4">
-                                <i class="fas fa-code text-blue-900"></i>
+                            <div class="bg-accent-light p-2 rounded-full mr-4">
+                                <i class="fas fa-code text-primary-900"></i>
                             </div>
                             <div>
                                 <h5 class="font-bold">Программное обеспечение</h5>
@@ -334,35 +351,48 @@
     <section id="projects" class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <h3 class="text-3xl font-bold mb-12 text-center section-title">Проекты и публикации</h3>
+            <div class="max-w-4xl mx-auto">
+
+                <!-- Tabs navigation -->
+                <div id="projpub-tabs" class="flex justify-center mb-8 text-sm sm:text-base">
+                <button data-tab="projects"
+                        class="tab-btn px-4 py-2 font-medium border-b-2 border-primary-900
+                                text-primary-900">
+                    Проекты
+                </button>
+                <button data-tab="pubs"
+                        class="tab-btn px-4 py-2 font-medium border-b-2 border-transparent
+                                text-gray-500 hover:text-primary-900">
+                    Публикации
+                </button>
+                </div>
             
-            <div class="grid md:grid-cols-2 gap-8 mb-12">
-                <!-- Projects -->
-                <div>
-                    <h4 class="text-2xl font-bold mb-6">Текущие проекты</h4>
-
-                    <!-- контейнер для подгружаемых карточек -->
+                <div class="space-y-10">
+                <!-- ── Projects panel ───────────────────────── -->
+                <div id="projects-panel">
                     <div class="space-y-6" id="projects-container"></div>
-
-                    <!-- кнопка «Показать больше» -->
+            
                     <div class="mt-6 text-center">
-                        <button id="load-more-projects"
-                                class="bg-blue-900 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
-                            Показать больше
-                        </button>
+                    <button id="load-more-projects"
+                            class="bg-primary-900 text-white px-6 py-2 rounded-lg
+                                    hover:bg-primary-700 transition">
+                        Показать больше
+                    </button>
                     </div>
                 </div>
-                
-                <!-- Publications -->
-                <div>
-                    <h4 class="text-2xl font-bold mb-6">Научные публикации</h4>
-                    
-                    <div class="space-y-4" id="publications-container">
-                        <!-- Publications will be loaded here by JavaScript -->
-                    </div>
-                    
+            
+                <!-- ── Publications panel ───────────────────── -->
+                <div id="pubs-panel" class="hidden">
+                    <div class="space-y-4" id="publications-container"></div>
+            
                     <div class="mt-6 text-center">
-                        <button id="load-more-pubs" class="bg-blue-900 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">Загрузить больше</button>
+                    <button id="load-more-pubs"
+                            class="bg-primary-900 text-white px-6 py-2 rounded-lg
+                                    hover:bg-primary-700 transition">
+                        Загрузить больше
+                    </button>
                     </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -379,8 +409,8 @@
                     
                     <div class="space-y-6">
                         <div class="flex items-start">
-                            <div class="bg-blue-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-laptop-code text-blue-900"></i>
+                            <div class="bg-accent-light p-3 rounded-full mr-4">
+                                <i class="fas fa-laptop-code text-primary-900"></i>
                             </div>
                             <div>
                                 <h5 class="font-bold text-lg mb-2">Практика и стажировки</h5>
@@ -388,8 +418,8 @@
                             </div>
                         </div>
                         <div class="flex items-start">
-                            <div class="bg-blue-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-trophy text-blue-900"></i>
+                            <div class="bg-accent-light p-3 rounded-full mr-4">
+                                <i class="fas fa-trophy text-primary-900"></i>
                             </div>
                             <div>
                                 <h5 class="font-bold text-lg mb-2">Участие в конкурсах</h5>
@@ -397,8 +427,8 @@
                             </div>
                         </div>
                         <div class="flex items-start">
-                            <div class="bg-blue-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-book text-blue-900"></i>
+                            <div class="bg-accent-light p-3 rounded-full mr-4">
+                                <i class="fas fa-book text-primary-900"></i>
                             </div>
                             <div>
                                 <h5 class="font-bold text-lg mb-2">Научная работа</h5>
@@ -413,7 +443,7 @@
                 </div>
             </div>
             
-            <div class="bg-blue-50 p-8 rounded-lg">
+            <div class="bg-gray-50 p-8 rounded-lg">
                 <h4 class="text-2xl font-bold mb-6">Требования для участия</h4>
                 
                 <div class="grid md:grid-cols-2 gap-6">
@@ -438,7 +468,7 @@
                 </div>
                 
                 <div class="mt-6 text-center">
-                    <a href="#contacts" class="bg-blue-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition inline-block">Подать заявку</a>
+                    <a href="#contacts" class="bg-primary-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-700 transition inline-block">Подать заявку</a>
                 </div>
             </div>
         </div>
@@ -475,15 +505,15 @@
                     <form id="contact-form" class="space-y-4">
                         <div>
                             <label for="name" class="block mb-1">Ваше имя</label>
-                            <input type="text" id="name" class="w-full px-4 py-2 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <input type="text" id="name" class="w-full px-4 py-2 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-700">
                         </div>
                         <div>
                             <label for="email" class="block mb-1">Email</label>
-                            <input type="email" id="email" class="w-full px-4 py-2 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <input type="email" id="email" class="w-full px-4 py-2 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-700">
                         </div>
                         <div>
                             <label for="subject" class="block mb-1">Тема</label>
-                            <select id="subject" class="w-full px-4 py-2 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <select id="subject" class="w-full px-4 py-2 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-700">
                                 <option value="">Выберите тему</option>
                                 <option value="study">Обучение</option>
                                 <option value="cooperation">Сотрудничество</option>
@@ -493,9 +523,9 @@
                         </div>
                         <div>
                             <label for="message" class="block mb-1">Сообщение</label>
-                            <textarea id="message" rows="4" class="w-full px-4 py-2 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                            <textarea id="message" rows="4" class="w-full px-4 py-2 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-700"></textarea>
                         </div>
-                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition w-full">Отправить</button>
+                        <button type="submit" class="bg-primary-700 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-medium transition w-full">Отправить</button>
                     </form>
                 </div>
             </div>

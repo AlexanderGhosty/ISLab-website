@@ -221,6 +221,24 @@
         document.getElementById("load-more-projects")
                 .addEventListener("click", () => projectsUrl && loadProjects());
 
+        /* ───────────────── Tabs «Проекты / Публикации» ───────────────── */
+        document.querySelectorAll('#projpub-tabs .tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+            // визуальное состояние
+            document.querySelectorAll('#projpub-tabs .tab-btn').forEach(b => {
+                b.classList.toggle('border-primary-900', b === btn);
+                b.classList.toggle('text-primary-900',  b === btn);
+                b.classList.toggle('text-gray-500',     b !== btn);
+            });
+        
+            // show/hide panels
+            const showProjects = btn.dataset.tab === 'projects';
+            document.getElementById('projects-panel').classList.toggle('hidden', !showProjects);
+            document.getElementById('pubs-panel').classList.toggle   ('hidden',  showProjects);
+            });
+        });
+        
+
         document.addEventListener('DOMContentLoaded', function() {
             loadStaff();
             loadNews();
