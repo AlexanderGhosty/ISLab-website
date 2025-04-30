@@ -26,18 +26,23 @@
         .hero-gradient {
             background: linear-gradient(135deg, #0A132E 0%, #1E3A8A 100%);
         }
-        .section-title {
-            position: relative;
-            display: inline-block;
+        .section-title {               /* позиционирование больше не нужно */
+            display:inline-block;
         }
-        .section-title:after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 60%;
-            height: 3px;
-            background: #00D1FF; /* accent */;
+        .section-title::after{        
+            content:'';
+            display:block;
+            width:60px;               
+            height:4px;
+            margin-top:12px;
+            border-radius:2px;
+            background:linear-gradient(90deg,#00D1FF 0%,#67E8F9 100%);
+        }
+        @media (max-width: 639px){    
+            .section-title::after{
+                content:none;           
+                display:none;          
+            }
         }
         .news-card:hover {
             transform: translateY(-5px);
@@ -172,7 +177,11 @@
     <!-- About Lab Section -->
     <section id="about" class="py-16">
         <div class="container mx-auto px-4">
-            <h3 class="text-3xl font-bold mb-12 text-center section-title">О лаборатории</h3>
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-1 bg-accent-light/20 text-accent rounded-full text-sm font-medium mb-4">О нас</span>
+                <h3 class="text-3xl font-bold mb-4 section-title inline-block font-heading">О лаборатории</h3>
+            </div>
+            
             
             <!-- History -->
             <div class="flex flex-col lg:flex-row items-center mb-16">
@@ -224,7 +233,11 @@
     <!-- Activities Section -->
     <section id="activities" class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
-            <h3 class="text-3xl font-bold mb-12 text-center section-title">Направления деятельности</h3>
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-1 bg-accent-light/20 text-accent rounded-full text-sm font-medium mb-4">Направления</span>
+                <h3 class="text-3xl font-bold mb-4 section-title inline-block font-heading">Направления деятельности</h3>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Мы объединяем исследования, образование и практику для комплексного подхода к кибербезопасности.</p>
+            </div>
             
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Research -->
@@ -287,7 +300,11 @@
     <!-- Resources Section -->
     <section id="resources" class="py-16">
         <div class="container mx-auto px-4">
-            <h3 class="text-3xl font-bold mb-12 text-center section-title">Ресурсы и инфраструктура</h3>
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-1 bg-accent-light/20 text-accent rounded-full text-sm font-medium mb-4">Ресурсы</span>
+                <h3 class="text-3xl font-bold mb-4 section-title inline-block font-heading">Ресурсы и инфраструктура</h3>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Современное оборудование и партнерская сеть для реализации сложных проектов.</p>
+            </div>
             
             <div class="grid md:grid-cols-2 gap-8 mb-12">
                 <div>
@@ -330,8 +347,8 @@
             </div>
             
             <div>
-                <h4 class="text-2xl font-bold mb-6">Партнеры и сотрудничество</h4>
-                <p class="text-gray-700 mb-8">Мы активно сотрудничаем с ведущими компаниями и научными центрами в области информационной безопасности:</p>
+                <h4 class="text-2xl font-bold mb-8 text-center font-heading">Партнеры и сотрудничество</h4>
+                <p class="text-gray-700 mb-12 text-center max-w-3xl mx-auto">Мы активно сотрудничаем с ведущими компаниями и научными центрами в области информационной безопасности, что позволяет нашим студентам получать доступ к передовым технологиям и реальным проектам.</p>
                 
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
                     <div class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24">
@@ -360,7 +377,11 @@
     <!-- Projects and Publications -->
     <section id="projects" class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
-            <h3 class="text-3xl font-bold mb-12 text-center section-title">Проекты и публикации</h3>
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-1 bg-accent-light/20 text-accent rounded-full text-sm font-medium mb-4">Исследования</span>
+                <h3 class="text-3xl font-bold mb-4 section-title inline-block font-heading">Проекты и публикации</h3>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Наши последние исследовательские работы и реализованные проекты в области кибербезопасности.</p>
+            </div>
             <div class="max-w-4xl mx-auto">
 
                 <!-- Tabs navigation -->
@@ -411,7 +432,11 @@
     <!-- For Students -->
     <section id="students" class="py-16">
         <div class="container mx-auto px-4">
-            <h3 class="text-3xl font-bold mb-12 text-center section-title">Студентам и абитуриентам</h3>
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-1 bg-accent-light/20 text-accent rounded-full text-sm font-medium mb-4">Обучение</span>
+                <h3 class="text-3xl font-bold mb-4 section-title inline-block font-heading">Студентам и абитуриентам</h3>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Возможности для обучения, исследований и профессионального роста в области кибербезопасности.</p>
+            </div>
             
             <div class="grid md:grid-cols-2 gap-8 mb-12">
                 <div>
@@ -543,25 +568,25 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-gray-300 py-8">
+    <footer class="bg-gray-800 text-gray-400 py-8">
         <div class="container mx-auto px-4">
             <div class="grid md:grid-cols-4 gap-8 mb-8">
                 <div>
                     <h5 class="text-white font-bold mb-4">Лаборатория</h5>
                     <ul class="space-y-2">
-                        <li><a href="#about" class="hover:text-white transition">О нас</a></li>
-                        <li><a href="#activities" class="hover:text-white transition">Направления</a></li>
-                        <li><a href="#resources" class="hover:text-white transition">Ресурсы</a></li>
-                        <li><a href="#projects" class="hover:text-white transition">Проекты</a></li>
+                        <li><a href="#about" class="hover:text-accent transition">О нас</a></li>
+                        <li><a href="#activities" class="hover:text-accent transition">Направления</a></li>
+                        <li><a href="#resources" class="hover:text-accent transition">Ресурсы</a></li>
+                        <li><a href="#projects" class="hover:text-accent transition">Проекты</a></li>
                     </ul>
                 </div>
                 <div>
                     <h5 class="text-white font-bold mb-4">Образование</h5>
                     <ul class="space-y-2">
-                        <li><a href="#students" class="hover:text-white transition">Студентам</a></li>
-                        <li><a href="#" class="hover:text-white transition">Программы</a></li>
-                        <li><a href="#" class="hover:text-white transition">Мероприятия</a></li>
-                        <li><a href="#" class="hover:text-white transition">Стажировки</a></li>
+                        <li><a href="#students" class="hover:text-accent transition">Студентам</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Программы</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Мероприятия</a></li>
+                        <li><a href="#" class="hover:text-accent transition">Стажировки</a></li>
                     </ul>
                 </div>
                 <div>
