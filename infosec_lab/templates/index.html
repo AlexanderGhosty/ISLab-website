@@ -16,6 +16,21 @@
                 "accent":       "#00D1FF",  // CyberCyan
                 "accent-light": "#67E8F9",
                 "lime-400":     "#A3E635"   // для call-outs
+              },
+              animation: {
+                'float': 'float 6s ease-in-out infinite',
+                'float-reverse': 'float-reverse 5s ease-in-out infinite',
+                'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              },
+              keyframes: {
+                float: {
+                  '0%, 100%': { transform: 'translateY(0)' },
+                  '50%': { transform: 'translateY(-20px)' },
+                },
+                'float-reverse': {
+                  '0%, 100%': { transform: 'translateY(0)' },
+                  '50%': { transform: 'translateY(20px)' },
+                }
               }
             }
           }
@@ -25,8 +40,53 @@
     <style>
         .hero-gradient {
             background: linear-gradient(135deg, #0A132E 0%, #1E3A8A 100%);
+            position: relative;
+            overflow: hidden;
         }
-        .section-title {               /* позиционирование больше не нужно */
+        .hero-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(0, 209, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(103, 232, 249, 0.08) 0%, transparent 50%);
+            background-size: 200% 200%;
+            animation: gradient-move 15s ease infinite;
+        }
+        @keyframes gradient-move {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        .cyber-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.3;
+        }
+        .cyber-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 209, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        .cyber-card:hover {
+            border-color: rgba(0, 209, 255, 0.5);
+            box-shadow: 0 8px 32px rgba(0, 209, 255, 0.1);
+        }
+        .glow-text {
+            text-shadow: 0 0 10px rgba(0, 209, 255, 0.7);
+        }
+
+        .section-title {
             display:inline-block;
         }
         .section-title::after{        
@@ -95,7 +155,7 @@
     <!-- Navigation -->
     <nav class="hidden lg:block">
       <ul class="flex flex-wrap gap-x-6 gap-y-2 whitespace-nowrap">
-        <li><a href="#about"       class="navlink">О лаборатории</a></li>
+        <li><a href="#about"       class="navlink">О Лаборатории</a></li>
         <li><a href="#activities"  class="navlink">Направления</a></li>
         <li><a href="#resources"   class="navlink">Ресурсы</a></li>
         <li><a href="#projects"    class="navlink">Проекты</a></li>
@@ -112,37 +172,82 @@
   </div>
 </header>
 
-   <!-- Hero Section -->
-    <section class="relative overflow-hidden text-white">
-        <div class="absolute inset-0 hero-gradient"></div>
+   <!-- Hero Section - Redesigned -->
+   <section class="hero-gradient text-white py-20 md:py-32 relative">
+    <div class="hero-pattern"></div>
+    <div class="cyber-grid"></div>
     
-        <div class="relative container mx-auto px-4 py-16 sm:py-20 md:py-24">
-        <h2 class="section-title font-heading text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
-            Лаборатории информационной безопасности
-        </h2>
+    <!-- Floating elements -->
+    <div class="absolute top-1/4 left-1/4 w-8 h-8 rounded-full bg-accent/30 blur-md animate-pulse-slow"></div>
+    <div class="absolute top-1/3 right-1/4 w-12 h-12 rounded-full bg-accent-light/20 blur-md animate-pulse-slow"></div>
+    <div class="absolute bottom-1/4 right-1/3 w-6 h-6 rounded-full bg-white/10 blur-sm animate-pulse-slow"></div>
     
-        <p class="text-lg sm:text-xl mb-10 max-w-2xl">
-            Лаборатория информационной безопасности Московского&nbsp;Политеха
-            занимается передовыми исследованиями&nbsp;— от&nbsp;криптографии до&nbsp;анализа уязвимостей.
-        </p>
-    
-        <div class="flex flex-wrap gap-4">
-            <a href="#contacts"
-            class="px-6 py-3 rounded-lg font-medium
-                    bg-primary-900 hover:bg-primary-700
-                    transition transform hover:scale-105">
-            Связаться с&nbsp;нами
-            </a>
-            <a href="#about"
-            class="px-6 py-3 rounded-lg font-medium border
-                    border-white hover:border-accent
-                    hover:bg-accent-light/10
-                    transition transform hover:scale-105">
-            Узнать больше
-            </a>
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="flex flex-col lg:flex-row items-center gap-12">
+            <div class="lg:w-1/2">
+                <div class="mb-6 flex items-center">
+                    <span class="px-3 py-1 bg-accent-light/20 text-accent rounded-full text-sm font-medium mr-3">Кибербезопасность</span>
+                    <span class="px-3 py-1 bg-accent-light/20 text-accent rounded-full text-sm font-medium">Исследования</span>
+                </div>
+                
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                    <span class="text-accent glow-text">Защита</span> цифрового будущего
+                </h2>
+                
+                <p class="text-xl md:text-2xl mb-8 opacity-90 max-w-2xl">
+                    Передовые исследования и разработки в области информационной безопасности в Московском Политехе
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#contacts" class="bg-accent hover:bg-accent-light text-primary-900 px-6 py-4 rounded-lg font-bold transition flex items-center justify-center gap-2">
+                        <i class="fas fa-user-graduate"></i> Связаться с нами
+                    </a>
+                    <a href="#about" class="border-2 border-accent text-accent px-6 py-4 rounded-lg font-bold hover:bg-accent/10 transition flex items-center justify-center gap-2">
+                        <i class="fas fa-code"></i> Узнать больше
+                    </a>
+                </div>
+            </div>
+            
+            <div class="lg:w-1/2 mt-12 lg:mt-0 relative">
+                <div class="cyber-card p-6 rounded-2xl animate-float">
+                    <div class="flex items-center mb-4">
+                        <div class="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    </div>
+                    <div class="bg-primary-900/80 p-4 rounded-lg font-mono text-sm md:text-base overflow-x-auto">
+                        <p class="text-accent">// Лаборатория информационной безопасности</p>
+                        <p class="text-white">> initResearch("кибербезопасность");</p>
+                        <p class="text-green-400">✓ Подключено к защищенному каналу</p>
+                        <p class="text-white">> analyzeThreats();</p>
+                        <p class="text-green-400">✓ Обнаружено 42 новых вектора атак</p>
+                        <p class="text-white">> deploySolutions();</p>
+                        <p class="text-green-400 blink">✓ Система защиты активирована</p>
+                    </div>
+                </div>
+                
+                <div class="cyber-card p-4 rounded-xl w-3/4 ml-auto -mt-6 animate-float-reverse">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm font-mono text-accent">security_status.exe</span>
+                        <div class="flex">
+                            <div class="w-2 h-2 rounded-full bg-green-500 mr-1"></div>
+                            <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                        </div>
+                    </div>
+                    <div class="bg-primary-900/80 p-3 rounded-lg">
+                        <div class="flex justify-between text-xs mb-1">
+                            <span class="text-gray-400">Защита данных:</span>
+                            <span class="text-green-400">100%</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2">
+                            <div class="bg-accent h-2 rounded-full" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        </div>
-    </section>
+    </div>
+</section>
 
     <!-- News and Contacts -->
     <section class="py-16 bg-gray-50">
@@ -202,7 +307,7 @@
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
                 <span class="inline-block px-4 py-1 bg-accent-light/20 text-accent rounded-full text-sm font-medium mb-4">О нас</span>
-                <h3 class="text-3xl font-bold mb-4 section-title inline-block font-heading">О лаборатории</h3>
+                <h3 class="text-3xl font-bold mb-4 section-title inline-block font-heading">О Лаборатории</h3>
             </div>
             
             
@@ -214,7 +319,7 @@
                     <p class="text-gray-700">За эти годы лаборатория стала признанным центром компетенций в области кибербезопасности, подготовив десятки специалистов и реализовав множество успешных проектов.</p>
                 </div>
                 <div class="lg:w-1/2">
-                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="История лаборатории" class="rounded-lg shadow-lg w-full">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="История Лаборатории" class="rounded-lg shadow-lg w-full">
                 </div>
             </div>
             
@@ -367,7 +472,7 @@
                       </div>
                 </div>
                 <div>
-                    <img src="https://images.unsplash.com/photo-1597852074816-d933c7d2b988?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Оборудование лаборатории" class="rounded-lg shadow-lg w-full">
+                    <img src="https://images.unsplash.com/photo-1597852074816-d933c7d2b988?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Оборудование Лаборатории" class="rounded-lg shadow-lg w-full">
                 </div>
             </div>
             
@@ -474,7 +579,7 @@
                             </div>
                             <div>
                                 <h5 class="font-bold text-lg mb-2">Практика и стажировки</h5>
-                                <p class="text-gray-700">Возможность прохождения практики в лаборатории и наших партнерских компаниях с перспективой трудоустройства.</p>
+                                <p class="text-gray-700">Возможность прохождения практики в Лаборатории и наших партнерских компаниях с перспективой трудоустройства.</p>
                             </div>
                         </div>
                         <div class="flex items-start">
@@ -492,14 +597,14 @@
                             </div>
                             <div>
                                 <h5 class="font-bold text-lg mb-2">Научная работа</h5>
-                                <p class="text-gray-700">Реализация собственных исследовательских проектов под руководством сотрудников лаборатории с возможностью публикации результатов.</p>
+                                <p class="text-gray-700">Реализация собственных исследовательских проектов под руководством сотрудников Лаборатории с возможностью публикации результатов.</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <div>
-                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="Студенты лаборатории" class="rounded-lg shadow-lg w-full">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="Студенты Лаборатории" class="rounded-lg shadow-lg w-full">
                 </div>
             </div>
             
@@ -513,7 +618,7 @@
                             <li>Обучение на 2-4 курсах по IT-специальностям</li>
                             <li>Базовые знания программирования (Python, C++)</li>
                             <li>Интерес к информационной безопасности</li>
-                            <li>Готовность уделять лаборатории не менее 10 часов в неделю</li>
+                            <li>Готовность уделять Лаборатории не менее 10 часов в неделю</li>
                         </ul>
                     </div>
                     <div>
@@ -522,7 +627,7 @@
                             <li>Высокие баллы ЕГЭ по математике и информатике</li>
                             <li>Участие в олимпиадах по программированию или информационной безопасности</li>
                             <li>Мотивационное письмо с обоснованием выбора направления</li>
-                            <li>Возможность пройти собеседование с руководителем лаборатории</li>
+                            <li>Возможность пройти собеседование с руководителем Лаборатории</li>
                         </ul>
                     </div>
                 </div>
