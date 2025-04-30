@@ -67,6 +67,11 @@
         .publication-item:hover {
             background-color: #f8fafc;
         }
+
+        .partner-logo {
+            max-height: 64px;       
+            width: auto;
+        }
     </style>
 </head>
 <body class="font-sans text-gray-800">
@@ -83,7 +88,7 @@
                     class="h-12 flex-shrink-0 hidden lg:block"
                     alt="Московский Политех">
                 <h1 class="ml-4 font-bold leading-tight text-base sm:text-lg lg:text-xl">
-                    Лаборатория <span class="block sm:inline">информационной</span> безопасности
+                    Лаборатории <span class="block sm:inline">информационной</span> безопасности
                 </h1>
             </div>
 
@@ -107,17 +112,35 @@
   </div>
 </header>
 
-    <!-- Hero Section -->
-    <section class="hero-gradient text-white py-20">
-        <div class="container mx-auto px-4">
-            <div class="max-w-3xl">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6">Исследования и разработки в области кибербезопасности</h2>
-                <p class="text-xl mb-8">Лаборатория информационной безопасности Московского Политеха занимается передовыми исследованиями в области защиты данных, криптографии и анализа уязвимостей.</p>
-                <div class="flex space-x-4">
-                    <a href="#contacts" class="bg-white text-primary-900 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition">Связаться с нами</a>
-                    <a href="#about" class="border-2 border-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-primary-900 transition">Узнать больше</a>
-                </div>
-            </div>
+   <!-- Hero Section -->
+    <section class="relative overflow-hidden text-white">
+        <div class="absolute inset-0 hero-gradient"></div>
+    
+        <div class="relative container mx-auto px-4 py-16 sm:py-20 md:py-24">
+        <h2 class="section-title font-heading text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
+            Лаборатории информационной безопасности
+        </h2>
+    
+        <p class="text-lg sm:text-xl mb-10 max-w-2xl">
+            Лаборатория информационной безопасности Московского&nbsp;Политеха
+            занимается передовыми исследованиями&nbsp;— от&nbsp;криптографии до&nbsp;анализа уязвимостей.
+        </p>
+    
+        <div class="flex flex-wrap gap-4">
+            <a href="#contacts"
+            class="px-6 py-3 rounded-lg font-medium
+                    bg-primary-900 hover:bg-primary-700
+                    transition transform hover:scale-105">
+            Связаться с&nbsp;нами
+            </a>
+            <a href="#about"
+            class="px-6 py-3 rounded-lg font-medium border
+                    border-white hover:border-accent
+                    hover:bg-accent-light/10
+                    transition transform hover:scale-105">
+            Узнать больше
+            </a>
+        </div>
         </div>
     </section>
 
@@ -313,33 +336,35 @@
                     
                     <div class="space-y-4">
                         <div class="flex items-start">
-                            <div class="bg-accent-light p-2 rounded-full mr-4">
-                                <i class="fas fa-server text-primary-900"></i>
-                            </div>
-                            <div>
-                                <h5 class="font-bold">Вычислительные мощности</h5>
-                                <p class="text-gray-700">Кластеры для анализа больших данных и моделирования атак</p>
-                            </div>
+                          <div class="bg-accent-light w-10 h-10 flex items-center justify-center rounded-full mr-4">
+                            <i class="fas fa-server text-primary-900 text-lg"></i>
+                          </div>
+                          <div>
+                            <h5 class="font-bold">Вычислительные мощности</h5>
+                            <p class="text-gray-700">Кластеры для анализа больших данных и моделирования атак</p>
+                          </div>
                         </div>
+
                         <div class="flex items-start">
-                            <div class="bg-accent-light p-2 rounded-full mr-4">
-                                <i class="fas fa-shield-alt text-primary-900"></i>
-                            </div>
-                            <div>
-                                <h5 class="font-bold">Средства защиты</h5>
-                                <p class="text-gray-700">Файрволлы, системы обнаружения вторжений, криптографические модули</p>
-                            </div>
+                          <div class="bg-accent-light w-10 h-10 flex items-center justify-center rounded-full mr-4">
+                            <i class="fas fa-shield-alt text-primary-900 text-lg"></i>
+                          </div>
+                          <div>
+                            <h5 class="font-bold">Средства защиты</h5>
+                            <p class="text-gray-700">Файрволлы, системы обнаружения вторжений, криптографические модули</p>
+                          </div>
                         </div>
+
                         <div class="flex items-start">
-                            <div class="bg-accent-light p-2 rounded-full mr-4">
-                                <i class="fas fa-code text-primary-900"></i>
-                            </div>
-                            <div>
-                                <h5 class="font-bold">Программное обеспечение</h5>
-                                <p class="text-gray-700">Лицензионные инструменты для анализа уязвимостей и пентестинга</p>
-                            </div>
+                          <div class="bg-accent-light w-10 h-10 flex items-center justify-center rounded-full mr-4">
+                            <i class="fas fa-code text-primary-900 text-lg"></i>
+                          </div>
+                          <div>
+                            <h5 class="font-bold">Программное обеспечение</h5>
+                            <p class="text-gray-700">Лицензионные инструменты для анализа уязвимостей и пентестинга</p>
+                          </div>
                         </div>
-                    </div>
+                      </div>
                 </div>
                 <div>
                     <img src="https://images.unsplash.com/photo-1597852074816-d933c7d2b988?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Оборудование лаборатории" class="rounded-lg shadow-lg w-full">
@@ -352,24 +377,24 @@
                 
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
                     <div class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24">
-                        <img src="{% static 'img/kasp.webp' %}" alt="Kaspersky" class="h-12 object-contain">
+                        <img src="{% static 'img/kasp.webp' %}" alt="Kaspersky" class="partner-logo">
                     </div>
                     <div class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24">
-                        <img src="{% static 'img/roscosmos.webp' %}" alt="Роскосмос" class="h-12 object-contain">
+                        <img src="{% static 'img/roscosmos.webp' %}" alt="Роскосмос" class="partner-logo">
                     </div>
                     <div class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24">
-                        <img src="{% static 'img/sber.webp' %}" alt="Сбер" class="h-12 object-contain">
+                        <img src="{% static 'img/sber.webp' %}" alt="Сбер" class="partner-logo">
                     </div>
                     <div class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24">
-                        <img src="{% static 'img/yadnex.webp' %}" alt="Яндекс" class="h-12 object-contain">
+                        <img src="{% static 'img/yadnex.webp' %}" alt="Яндекс" class="partner-logo">
                     </div>
                     <div class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24">
-                        <img src="{% static 'img/eostel.webp' %}" alt="Ростелеком" class="h-12 object-contain">
+                        <img src="{% static 'img/eostel.webp' %}" alt="Ростелеком" class="partner-logo">
                     </div>
                     <div class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24">
-                        <img src="{% static 'img/Bitdefender.webp' %}" alt="Bitdefender" class="h-12 object-contain">
+                        <img src="{% static 'img/Bitdefender.webp' %}" alt="Bitdefender" class="partner-logo">
                     </div>
-                </div>
+                  </div>                  
             </div>
         </div>
     </section>

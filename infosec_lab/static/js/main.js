@@ -53,8 +53,6 @@
             newsContainer.innerHTML = '';
             
             newsToRender.forEach(news => {
-                console.log(news);
-                
                 const newsElement = document.createElement('div');
                 newsElement.className = 'bg-white rounded-lg shadow-md overflow-hidden news-card transition duration-300';
                 newsElement.innerHTML = `
