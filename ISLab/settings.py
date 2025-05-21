@@ -22,7 +22,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'infosec_lab_app',
     'rest_framework',
 ]
 
@@ -36,7 +35,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'infosec_lab.urls'
+ROOT_URLCONF = 'ISLab.urls'
 
 TEMPLATES = [
     {
@@ -53,7 +52,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'infosec_lab.wsgi.application'
+WSGI_APPLICATION = 'ISlab.wsgi.application'
 
 
 # Database
