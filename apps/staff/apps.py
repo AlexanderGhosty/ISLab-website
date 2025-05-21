@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class InfosecLabAppConfig(AppConfig):
+class StaffConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'infosec_lab_app'
+    name = 'apps.staff'

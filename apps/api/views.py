@@ -1,7 +1,12 @@
-# infosec_lab_app/views.py
+from django.shortcuts import render
 from rest_framework import viewsets, permissions
-from .models import News, Publication, Staff, Project
-from .serializers import NewsSerializer, PublicationSerializer, StaffSerializer, ProjectSerializer
+
+from .serializers import NewsSerializer, ProjectSerializer, PublicationSerializer, StaffSerializer
+from apps.news.models import News
+from apps.projects.models import Project
+from apps.publications.models import Publication
+from apps.staff.models import Staff
+
 
 class NewsViewSet(viewsets.ReadOnlyModelViewSet):
     """
@@ -10,6 +15,16 @@ class NewsViewSet(viewsets.ReadOnlyModelViewSet):
     """
     queryset = News.objects.all().order_by("-date")
     serializer_class = NewsSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class ProjectViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    GET /api/projects/      → список проектов (пагинируется)
+    GET /api/projects/{id}/ → один проект
+    """
+    queryset           = Project.objects.all()
+    serializer_class   = ProjectSerializer
     permission_classes = [permissions.AllowAny]
 
 class PublicationViewSet(viewsets.ReadOnlyModelViewSet):
@@ -21,22 +36,14 @@ class PublicationViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = PublicationSerializer
     permission_classes = [permissions.AllowAny]
 
-class StaffViewSet(viewsets.ReadOnlyModelViewSet): 
+
+class StaffViewSet(viewsets.ReadOnlyModelViewSet):
     """
     GET /api/staff/       → список сотрудников
     GET /api/staff/{id}/  → один сотрудник
     """
-    queryset           = Staff.objects.all()
-    serializer_class   = StaffSerializer
+    queryset = Staff.objects.all()
+    serializer_class = StaffSerializer
     permission_classes = [permissions.AllowAny]
-    
-    pagination_class   = None 
 
-class ProjectViewSet(viewsets.ReadOnlyModelViewSet):
-    """
-    GET /api/projects/      → список проектов (пагинируется)
-    GET /api/projects/{id}/ → один проект
-    """
-    queryset           = Project.objects.all()
-    serializer_class   = ProjectSerializer
-    permission_classes = [permissions.AllowAny]
+    pagination_class = None

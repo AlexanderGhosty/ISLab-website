@@ -13,7 +13,7 @@ from rest_framework.routers import DefaultRouter
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('api/', include(router.urls)),
+    path('api/', include('apps.api.urls')),
     path('', TemplateView.as_view(template_name='index.html'), name='index'),  # Главная страница
     path("news/<int:id>/", TemplateView.as_view(template_name="news_detail.html"),
          name="news_detail"),
