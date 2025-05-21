@@ -2,7 +2,6 @@
 Django>=4.2,<5.0
 djangorestframework>=3.14.0     # DRF для создания REST API
 pillow>=10.0.0                  # Для ImageField
-mysqlclient>=2.2.0              # Поддержка MySQL для Django
 
 # Frontend стили
 django-tailwind>=3.5.1          # Tailwind CSS через Django
@@ -14,8 +13,10 @@ whitenoise>=6.5.0               # Для обслуживания static в prod
 # WSGI сервер
 gunicorn>=21.2.0
 
-# База данных (если используешь PostgreSQL)
-psycopg2>=2.9.9
+# Поддержка MySQL для Django
+psycopg2-binary>=2.9.9
+mysqlclient>=2.2.0
+
 
 # .env переменные
 python-decouple>=3.8
