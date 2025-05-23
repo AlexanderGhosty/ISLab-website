@@ -1,0 +1,115 @@
+.hero-gradient {
+    background: linear-gradient(135deg, #0A132E 0%, #1E3A8A 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle at 25% 25%, rgba(0, 209, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(103, 232, 249, 0.08) 0%, transparent 50%);
+    background-size: 200% 200%;
+    animation: gradient-move 15s ease infinite;
+}
+
+@keyframes gradient-move {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+.cyber-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.3;
+}
+
+.cyber-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 209, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.cyber-card:hover {
+    border-color: rgba(0, 209, 255, 0.5);
+    box-shadow: 0 8px 32px rgba(0, 209, 255, 0.1);
+}
+
+.glow-text {
+    text-shadow: 0 0 10px rgba(0, 209, 255, 0.7);
+}
+
+.section-title {
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    margin-top: 12px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #00D1FF 0%, #67E8F9 100%);
+}
+
+@media (max-width: 639px) {
+    .section-title::after {
+        content: none;
+        display: none;
+    }
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.staff-card:hover .staff-overlay {
+    opacity: 1;
+}
+
+.map-container {
+    position: relative;
+    overflow: hidden;
+    padding-top: 56.25%;
+}
+
+.map-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.publication-item:hover {
+    background-color: #f8fafc;
+}
+
+.partner-logo {
+    max-height: 64px;
+    width: auto;
+}
+
+.prose {
+    max-width: 100%;
+}

@@ -1,0 +1,28 @@
+# Основное
+Django>=4.2,<5.0
+djangorestframework>=3.14.0     # DRF для создания REST API
+pillow>=10.0.0                  # Для ImageField
+
+# Frontend стили
+django-tailwind>=3.5.1          # Tailwind CSS через Django
+django-browser-reload>=1.11.0   # Автоперезагрузка страниц
+
+# Статические файлы
+whitenoise>=6.5.0               # Для обслуживания static в production
+
+# WSGI сервер
+gunicorn>=21.2.0
+
+# Поддержка MySQL для Django
+psycopg2-binary>=2.9.9
+mysqlclient>=2.2.0
+
+
+# .env переменные
+python-decouple>=3.8
+
+# Отладка
+django-debug-toolbar>=4.2.0
+
+# CORS (если предполагается использовать API с фронтендом отдельно)
+django-cors-headers>=4.3.1

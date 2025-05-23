@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Новость | Лаборатория ИБ{% endblock %}
+
+{% block content %}
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/70 border-b border-white/30 shadow-sm">
+        <div class="container mx-auto flex flex-wrap lg:flex-nowrap items-center justify-between gap-4 px-4 py-3">
+            <div class="flex items-center min-w-0">
+                <!-- Mobile logo (small without text) -->
+                <img src="{% static 'img/polytech_logo_main_RGB_small.png' %}"
+                     class="h-10 flex-shrink-0 lg:hidden"
+                     alt="Московский Политех (compact)">
+                <!-- Desktop logo (Full with text) -->
+                <img src="{% static 'img/polytech_logo_main_RGB.png' %}"
+                     class="h-12 flex-shrink-0 hidden lg:block"
+                     alt="Московский Политех">
+                <h1 class="ml-4 font-bold leading-tight text-base sm:text-lg lg:text-xl">
+                    Лаборатория <span class="block sm:inline">информационной</span> безопасности
+                </h1>
+            </div>
+            <a href="/static" class="inline-flex items-center text-primary-900 hover:text-primary-700 transition">
+                <i class="fas fa-arrow-left mr-2"></i> На главную
+            </a>
+        </div>
+    </header>
+
+    <!-- News Detail -->
+    <main class="py-12 bg-gray-50" id="news-wrapper">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div id="loading" class="text-center py-16">
+                <div class="inline-block px-6 py-3 bg-primary-900 text-white rounded-lg">
+                    <i class="fas fa-spinner fa-spin mr-2"></i> Загрузка новости...
+                </div>
+            </div>
+
+            <article id="news-article" class="hidden">
+                <!-- Breadcrumbs -->
+                <nav class="mb-6 text-sm text-gray-600">
+                    <ol class="flex items-center space-x-2">
+                        <li><a href="/static" class="hover:text-accent transition">Главная</a></li>
+                        <li><span class="text-gray-400">/</span></li>
+                        <li><a href="/static#news" class="hover:text-accent transition">Новости</a></li>
+                        <li><span class="text-gray-400">/</span></li>
+                        <li class="text-primary-900 truncate max-w-xs" id="breadcrumb-title"></li>
+                    </ol>
+                </nav>
+
+                <!-- Title -->
+                <h1 id="news-title" class="text-3xl md:text-4xl font-bold text-primary-900 mb-4 leading-tight"></h1>
+
+                <!-- Meta -->
+                <div class="flex flex-wrap items-center justify-between mb-6 text-gray-600">
+                    <div class="flex items-center space-x-4 mb-2 sm:mb-0">
+                        <time id="news-date" class="flex items-center">
+                            <i class="far fa-calendar mr-1"></i>
+                            <span id="date-text"></span>
+                        </time>
+                    </div>
+                    <div class="flex items-center space-x-3" id="share-buttons">
+                        <span class="text-sm">Поделиться:</span>
+                        <a href="#" class="share-btn text-gray-700" id="share-vk"><i class="fab fa-vk"></i></a>
+                        <a href="#" class="share-btn text-gray-700" id="share-tg"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+
+                <!-- Main image -->
+                <div class="relative rounded-xl overflow-hidden shadow-xl mb-8 group">
+                    <img id="news-main-image" src="" alt=""
+                         class="w-full aspect-[16/9] object-cover transition duration-500"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-6 text-white">
+                        <p id="image-caption" class="text-sm opacity-90"></p>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div id="news-content" class="prose lg:prose-lg max-w-none mb-12"></div>
+
+                <!-- Gallery -->
+                <div id="gallery-wrapper" class="mb-12 hidden">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-primary-900">Фотогалерея</h2>
+                        <span id="gallery-count" class="text-gray-600"></span>
+                    </div>
+                    <div id="news-gallery" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+                </div>
+
+                <!-- Back button -->
+                <div class="text-center">
+                    <a href="{% url 'index' %}#news"
+                       class="inline-flex items-center px-6 py-3 bg-primary-900 text-white rounded-lg hover:bg-primary-700 transition">
+                        <i class="fas fa-arrow-left mr-2"></i> Все новости
+                    </a>
+                </div>
+            </article>
+        </div>
+    </main>
+    <!-- Image Modal -->
+    <div id="image-modal"
+         class="fixed inset-0 flex items-center justify-center bg-primary-900/90
+            opacity-0 invisible transition-opacity duration-300 z-50">
+    <div id="modal-card"
+         class="relative w-full max-w-5xl px-4 transform-gpu scale-95
+              transition-transform duration-300">
+        <!-- Close button -->
+        <button id="modal-close"
+                class="absolute top-3 right-3 sm:-top-4 sm:-right-4 w-10 h-10 rounded-full bg-white/90
+                   text-gray-800 flex items-center justify-center shadow-lg
+                   hover:rotate-90 transition-transform duration-300">
+            <i class="fas fa-times text-xl"></i>
+        </button>
+
+        <div class="cyber-card rounded-lg overflow-hidden">
+            <img id="modal-image"
+                 class="w-full h-auto max-h-[70vh] sm:max-h-[80vh] object-contain"
+                 src="" alt="">
+        </div>
+
+        <p id="modal-caption"
+           class="text-accent-light text-center mt-4 text-sm sm:text-base"></p>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div>
+            <h5 class="text-white font-bold mb-4">Лаборатория</h5>
+            <ul class="space-y-2">
+                <li><a href="#about" class="hover:text-accent transition">О нас</a></li>
+                <li><a href="#activities" class="hover:text-accent transition">Направления</a></li>
+                <li><a href="#resources" class="hover:text-accent transition">Ресурсы</a></li>
+                <li><a href="#projects" class="hover:text-accent transition">Проекты</a></li>
+            </ul>
+        </div>
+        <div>
+            <h5 class="text-white font-bold mb-4">Образование</h5>
+            <ul class="space-y-2">
+                <li><a href="#students" class="hover:text-accent transition">Студентам</a></li>
+                <li><a href="#" class="hover:text-accent transition">Программы</a></li>
+                <li><a href="#" class="hover:text-accent transition">Мероприятия</a></li>
+                <li><a href="#" class="hover:text-accent transition">Стажировки</a></li>
+            </ul>
+        </div>
+        <div>
+            <h5 class="text-white font-bold mb-4">Контакты</h5>
+            <ul class="space-y-2">
+                <li class="flex items-start">
+                    <i class="fas fa-map-marker-alt mt-1 mr-2"></i>
+                    <span>ул. Большая Семёновская, 38</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-phone-alt mt-1 mr-2"></i>
+                    <span>+7 (495) 223-05-23</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-envelope mt-1 mr-2"></i>
+                    <span>cybersec@mospolytech.ru</span>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h5 class="text-white font-bold mb-4">Социальные сети</h5>
+            <div class="flex space-x-4">
+                <a href="#" class="text-2xl hover:text-white transition"><i class="fab fa-vk"></i></a>
+                <a href="#" class="text-2xl hover:text-white transition"><i class="fab fa-telegram"></i></a>
+                <a href="#" class="text-2xl hover:text-white transition"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="text-2xl hover:text-white transition"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_scripts %}
+    <script src="{% static 'js/detail.js' %}"></script>
+{% endblock %}

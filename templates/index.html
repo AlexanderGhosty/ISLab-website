@@ -1,0 +1,665 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Главная | Лаборатория ИБ{% endblock %}
+
+{% block content %}
+
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/70 border-b border-white/30 shadow-sm">
+        <div class="container mx-auto flex flex-wrap lg:flex-nowrap items-center justify-between gap-4 px-4 py-3">
+            <div class="flex items-center min-w-0">
+                <!-- Mobile logo (small without text) -->
+                <img src="{% static 'img/polytech_logo_main_RGB_small.png' %}"
+                     class="h-10 flex-shrink-0 lg:hidden"
+                     alt="Московский Политех (compact)">
+                <!-- Desktop logo (Full with text) -->
+                <img src="{% static 'img/polytech_logo_main_RGB.png' %}"
+                     class="h-12 flex-shrink-0 hidden lg:block"
+                     alt="Московский Политех">
+                <h1 class="ml-4 font-bold leading-tight text-base sm:text-lg lg:text-xl">
+                    Лаборатории <span class="block sm:inline">информационной</span> безопасности
+                </h1>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="hidden lg:block">
+                <ul class="flex flex-wrap gap-x-6 gap-y-2 whitespace-nowrap">
+                    <li><a href="#about" class="navlink">О Лаборатории</a></li>
+                    <li><a href="#activities" class="navlink">Направления</a></li>
+                    <li><a href="#resources" class="navlink">Ресурсы</a></li>
+                    <li><a href="#projects" class="navlink">Проекты</a></li>
+                    <li><a href="#students" class="navlink">Студентам</a></li>
+                    <li><a href="#contacts" class="navlink">Контакты</a></li>
+                </ul>
+            </nav>
+
+            <!-- Burger -->
+            <button class="lg:hidden w-10 h-10 inline-flex items-center justify-center
+                   rounded-lg hover:bg-primary-900/5 transition">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section - Redesigned -->
+    <section class="hero-gradient text-white py-20 md:py-32 relative">
+        <div class="hero-pattern"></div>
+        <div class="cyber-grid"></div>
+
+        <!-- Floating elements -->
+        <div class="absolute top-1/4 left-1/4 w-8 h-8 rounded-full bg-accent/30 blur-md animate-pulse-slow"></div>
+        <div class="absolute top-1/3 right-1/4 w-12 h-12 rounded-full bg-accent-light/20 blur-md animate-pulse-slow"></div>
+        <div class="absolute bottom-1/4 right-1/3 w-6 h-6 rounded-full bg-white/10 blur-sm animate-pulse-slow"></div>
+
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2">
+                    <div class="mb-6 flex items-center">
+                        <span class="px-3 py-1 bg-accent-light/20 text-accent rounded-full text-sm font-medium mr-3">Кибербезопасность</span>
+                        <span class="px-3 py-1 bg-accent-light/20 text-accent rounded-full text-sm font-medium">Исследования</span>
+                    </div>
+
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                        <span class="text-accent glow-text">Защита</span> цифрового будущего
+                    </h2>
+
+                    <p class="text-xl md:text-2xl mb-8 opacity-90 max-w-2xl">
+                        Передовые исследования и разработки в области информационной безопасности в Московском Политехе
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contacts"
+                           class="bg-accent hover:bg-accent-light text-primary-900 px-6 py-4 rounded-lg font-bold transition flex items-center justify-center gap-2">
+                            <i class="fas fa-user-graduate"></i> Связаться с нами
+                        </a>
+                        <a href="#about"
+                           class="border-2 border-accent text-accent px-6 py-4 rounded-lg font-bold hover:bg-accent/10 transition flex items-center justify-center gap-2">
+                            <i class="fas fa-code"></i> Узнать больше
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2 mt-12 lg:mt-0 relative">
+                    <div class="cyber-card p-6 rounded-2xl animate-float">
+                        <div class="flex items-center mb-4">
+                            <div class="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <div class="bg-primary-900/80 p-4 rounded-lg font-mono text-sm md:text-base overflow-x-auto">
+                            <p class="text-accent">// Лаборатория информационной безопасности</p>
+                            <p class="text-white">> initResearch("кибербезопасность");</p>
+                            <p class="text-green-400">✓ Подключено к защищенному каналу</p>
+                            <p class="text-white">> analyzeThreats();</p>
+                            <p class="text-green-400">✓ Обнаружено 42 новых вектора атак</p>
+                            <p class="text-white">> deploySolutions();</p>
+                            <p class="text-green-400 blink">✓ Система защиты активирована</p>
+                        </div>
+                    </div>
+
+                    <div class="cyber-card p-4 rounded-xl w-3/4 ml-auto -mt-6 animate-float-reverse">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm font-mono text-accent">security_status.exe</span>
+                            <div class="flex">
+                                <div class="w-2 h-2 rounded-full bg-green-500 mr-1"></div>
+                                <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                            </div>
+                        </div>
+                        <div class="bg-primary-900/80 p-3 rounded-lg">
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="text-gray-400">Защита данных:</span>
+                                <span class="text-green-400">100%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-accent h-2 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News and Contacts -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- News Section -->
+                <div class="lg:w-2/3">
+                    <h3 class="text-2xl font-bold mb-6 section-title">Новости и события</h3>
+                    <div class="grid md:grid-cols-2 gap-6" id="news-container">
+                        <!-- News will be loaded here by JavaScript -->
+                    </div>
+                    <div class="mt-8 text-center">
+                        <button id="load-more-news"
+                                class="bg-primary-900 text-white px-6 py-2 rounded-lg hover:bg-primary-700 transition">
+                            Показать больше
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Contacts Section -->
+                <div class="lg:w-1/3">
+                    <h3 class="text-2xl font-bold mb-6 section-title">Контакты</h3>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="mb-4 flex items-start">
+                            <i class="fas fa-map-marker-alt text-primary-900 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium">Адрес</h4>
+                                <p class="text-gray-600">г. Москва, ул. Автозаводская, 16</p>
+                            </div>
+                        </div>
+                        <div class="mb-4 flex items-start">
+                            <i class="fas fa-phone-alt text-primary-900 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium">Телефон</h4>
+                                <p class="text-gray-600">+7 (495) 223-05-23</p>
+                            </div>
+                        </div>
+                        <div class="mb-4 flex items-start">
+                            <i class="fas fa-envelope text-primary-900 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium">Email</h4>
+                                <p class="text-gray-600">cybersec@mospolytech.ru</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-clock text-primary-900 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium">Часы работы</h4>
+                                <p class="text-gray-600">Пн-Пт: 9:00 - 18:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Lab Section -->
+    <section id="about" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-1 bg-accent-light/20 text-accent rounded-full text-sm font-medium mb-4">О нас</span>
+                <h3 class="text-3xl font-bold mb-4 section-title inline-block font-heading">О Лаборатории</h3>
+            </div>
+
+
+            <!-- History -->
+            <div class="flex flex-col lg:flex-row items-center mb-16">
+                <div class="lg:w-1/2 mb-8 lg:mb-0 lg:pr-8">
+                    <h4 class="text-2xl font-bold mb-4">История создания</h4>
+                    <p class="mb-4 text-gray-700">Лаборатория информационной безопасности была основана в 2015 году как
+                        часть факультета информационных технологий Московского Политеха. С момента создания мы активно
+                        развиваемся, расширяя направления исследований и сотрудничая с ведущими компаниями отрасли.</p>
+                    <p class="text-gray-700">За эти годы лаборатория стала признанным центром компетенций в области
+                        кибербезопасности, подготовив десятки специалистов и реализовав множество успешных проектов.</p>
+                </div>
+                <div class="lg:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
+                         alt="История Лаборатории" class="rounded-lg shadow-lg w-full">
+                </div>
+            </div>
+
+            <!-- Goals -->
+            <div class="bg-gray-50 p-8 rounded-lg mb-16">
+                <h4 class="text-2xl font-bold mb-6">Цели и задачи</h4>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="text-primary-900 mb-3">
+                            <i class="fas fa-bullseye text-2xl"></i>
+                        </div>
+                        <h5 class="font-bold mb-2">Основная цель</h5>
+                        <p class="text-gray-700">Создание безопасной цифровой среды через фундаментальные и прикладные
+                            исследования в области информационной безопасности.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="text-primary-900 mb-3">
+                            <i class="fas fa-tasks text-2xl"></i>
+                        </div>
+                        <h5 class="font-bold mb-2">Наши задачи</h5>
+                        <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                            <li>Разработка новых методов защиты информации</li>
+                            <li>Подготовка высококвалифицированных специалистов</li>
+                            <li>Сотрудничество с индустриальными партнерами</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Staff -->
+            <div>
+                <h4 class="text-2xl font-bold mb-8">Руководство и сотрудники</h4>
+                <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="staff-container">
+                    <!-- Staff will be loaded here by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section id="activities" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-1 bg-accent-light/20 text-accent rounded-full text-sm font-medium mb-4">Направления</span>
+                <h3 class="text-3xl font-bold mb-4 section-title inline-block font-heading">Направления
+                    деятельности</h3>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Мы объединяем исследования, образование и практику
+                    для
+                    комплексного подхода к кибербезопасности.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Research -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+                    <div class="text-primary-900 mb-4 text-4xl">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Научные исследования</h4>
+                    <p class="text-gray-700 mb-4">Мы проводим фундаментальные и прикладные исследования в следующих
+                        областях:</p>
+                    <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                        <li>Криптография и стеганография</li>
+                        <li>Анализ защищенности систем</li>
+                        <li>Искусственный интеллект в кибербезопасности</li>
+                        <li>Блокчейн и смарт-контракты</li>
+                    </ul>
+                </div>
+
+                <!-- Education -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+                    <div class="text-primary-900 mb-4 text-4xl">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Образовательные программы</h4>
+                    <p class="text-gray-700 mb-4">Лаборатория участвует в подготовке специалистов по следующим
+                        программам:</p>
+                    <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                        <li>Бакалавриат "Информационная безопасность"</li>
+                        <li>Магистратура "Кибербезопасность и защита данных"</li>
+                        <li>Курсы повышения квалификации</li>
+                        <li>Летние школы по кибербезопасности</li>
+                    </ul>
+                </div>
+
+                <!-- Consulting -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+                    <div class="text-primary-900 mb-4 text-4xl">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Консалтинговые услуги</h4>
+                    <p class="text-gray-700 mb-4">Предоставляем экспертные услуги для бизнеса и государственных
+                        организаций:</p>
+                    <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                        <li>Аудит информационной безопасности</li>
+                        <li>Разработка политик безопасности</li>
+                        <li>Расследование инцидентов</li>
+                        <li>Обучение персонала</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-12 grid md:grid-cols-2 gap-8">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                         alt="Образовательный процесс" class="rounded-lg shadow-lg w-full">
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                         alt="Консалтинг" class="rounded-lg shadow-lg w-full">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-1 bg-accent-light/20 text-accent rounded-full text-sm font-medium mb-4">Ресурсы</span>
+                <h3 class="text-3xl font-bold mb-4 section-title inline-block font-heading">Ресурсы и
+                    инфраструктура</h3>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Современное оборудование и партнерская сеть для
+                    реализации сложных проектов.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div>
+                    <h4 class="text-2xl font-bold mb-4">Оборудование и ПО</h4>
+                    <p class="text-gray-700 mb-6">Лаборатория оснащена современным оборудованием и специализированным
+                        программным обеспечением для проведения исследований и обучения:</p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="bg-accent-light w-10 h-10 flex items-center justify-center rounded-full mr-4">
+                                <i class="fas fa-server text-primary-900 text-lg"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold">Вычислительные мощности</h5>
+                                <p class="text-gray-700">Кластеры для анализа больших данных и моделирования атак</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="bg-accent-light w-10 h-10 flex items-center justify-center rounded-full mr-4">
+                                <i class="fas fa-shield-alt text-primary-900 text-lg"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold">Средства защиты</h5>
+                                <p class="text-gray-700">Файрволлы, системы обнаружения вторжений, криптографические
+                                    модули</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="bg-accent-light w-10 h-10 flex items-center justify-center rounded-full mr-4">
+                                <i class="fas fa-code text-primary-900 text-lg"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold">Программное обеспечение</h5>
+                                <p class="text-gray-700">Лицензионные инструменты для анализа уязвимостей и
+                                    пентестинга</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1597852074816-d933c7d2b988?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                         alt="Оборудование Лаборатории" class="rounded-lg shadow-lg w-full">
+                </div>
+            </div>
+
+            <div>
+                <h4 class="text-2xl font-bold mb-8 text-center font-heading">Партнеры и сотрудничество</h4>
+                <p class="text-gray-700 mb-12 text-center max-w-3xl mx-auto">Мы активно сотрудничаем с ведущими
+                    компаниями и
+                    научными центрами в области информационной безопасности, что позволяет нашим студентам получать
+                    доступ к
+                    передовым технологиям и реальным проектам.</p>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                    <div class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24">
+                        <img src="{% static 'img/kasp.webp' %}" alt="Kaspersky" class="partner-logo">
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24">
+                        <img src="{% static 'img/roscosmos.webp' %}" alt="Роскосмос" class="partner-logo">
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24">
+                        <img src="{% static 'img/sber.webp' %}" alt="Сбер" class="partner-logo">
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24">
+                        <img src="{% static 'img/yadnex.webp' %}" alt="Яндекс" class="partner-logo">
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24">
+                        <img src="{% static 'img/eostel.webp' %}" alt="Ростелеком" class="partner-logo">
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm flex items-center justify-center h-24">
+                        <img src="{% static 'img/Bitdefender.webp' %}" alt="Bitdefender" class="partner-logo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects and Publications -->
+    <section id="projects" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-1 bg-accent-light/20 text-accent rounded-full text-sm font-medium mb-4">Исследования</span>
+                <h3 class="text-3xl font-bold mb-4 section-title inline-block font-heading">Проекты и публикации</h3>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Наши последние исследовательские работы и
+                    реализованные
+                    проекты в области кибербезопасности.</p>
+            </div>
+            <div class="max-w-4xl mx-auto">
+
+                <!-- Tabs navigation -->
+                <div id="projpub-tabs" class="flex justify-center mb-8 text-sm sm:text-base">
+                    <button data-tab="projects"
+                            class="tab-btn px-4 py-2 font-medium border-b-2 border-primary-900
+                                text-primary-900">
+                        Проекты
+                    </button>
+                    <button data-tab="pubs"
+                            class="tab-btn px-4 py-2 font-medium border-b-2 border-transparent
+                                text-gray-500 hover:text-primary-900">
+                        Публикации
+                    </button>
+                </div>
+
+                <div class="space-y-10">
+                    <!-- ── Projects panel ───────────────────────── -->
+                    <div id="projects-panel">
+                        <div class="space-y-6" id="projects-container"></div>
+
+                        <div class="mt-6 text-center">
+                            <button id="load-more-projects"
+                                    class="bg-primary-900 text-white px-6 py-2 rounded-lg
+                                    hover:bg-primary-700 transition">
+                                Показать больше
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ── Publications panel ───────────────────── -->
+                    <div id="pubs-panel" class="hidden">
+                        <div class="space-y-4" id="publications-container"></div>
+
+                        <div class="mt-6 text-center">
+                            <button id="load-more-pubs"
+                                    class="bg-primary-900 text-white px-6 py-2 rounded-lg
+                                    hover:bg-primary-700 transition">
+                                Загрузить больше
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Students -->
+    <section id="students" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-1 bg-accent-light/20 text-accent rounded-full text-sm font-medium mb-4">Обучение</span>
+                <h3 class="text-3xl font-bold mb-4 section-title inline-block font-heading">Студентам и
+                    абитуриентам</h3>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Возможности для обучения, исследований и
+                    профессионального роста в области кибербезопасности.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div>
+                    <h4 class="text-2xl font-bold mb-6">Возможности для студентов</h4>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-accent-light p-3 rounded-full mr-4">
+                                <i class="fas fa-laptop-code text-primary-900"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-lg mb-2">Практика и стажировки</h5>
+                                <p class="text-gray-700">Возможность прохождения практики в Лаборатории и наших
+                                    партнерских
+                                    компаниях с перспективой трудоустройства.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-accent-light p-3 rounded-full mr-4">
+                                <i class="fas fa-trophy text-primary-900"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-lg mb-2">Участие в конкурсах</h5>
+                                <p class="text-gray-700">Подготовка и участие в CTF-соревнованиях, хакатонах и научных
+                                    конференциях с поддержкой опытных наставников.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-accent-light p-3 rounded-full mr-4">
+                                <i class="fas fa-book text-primary-900"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-lg mb-2">Научная работа</h5>
+                                <p class="text-gray-700">Реализация собственных исследовательских проектов под
+                                    руководством
+                                    сотрудников Лаборатории с возможностью публикации результатов.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80"
+                         alt="Студенты Лаборатории" class="rounded-lg shadow-lg w-full">
+                </div>
+            </div>
+
+            <div class="bg-gray-50 p-8 rounded-lg">
+                <h4 class="text-2xl font-bold mb-6">Требования для участия</h4>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h5 class="font-bold mb-3">Для студентов:</h5>
+                        <ul class="list-disc pl-5 text-gray-700 space-y-2">
+                            <li>Обучение на 2-4 курсах по IT-специальностям</li>
+                            <li>Базовые знания программирования (Python, C++)</li>
+                            <li>Интерес к информационной безопасности</li>
+                            <li>Готовность уделять Лаборатории не менее 10 часов в неделю</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="font-bold mb-3">Для абитуриентов:</h5>
+                        <ul class="list-disc pl-5 text-gray-700 space-y-2">
+                            <li>Высокие баллы ЕГЭ по математике и информатике</li>
+                            <li>Участие в олимпиадах по программированию или информационной безопасности</li>
+                            <li>Мотивационное письмо с обоснованием выбора направления</li>
+                            <li>Возможность пройти собеседование с руководителем Лаборатории</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-6 text-center">
+                    <a href="#contacts"
+                       class="bg-primary-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-700 transition inline-block">Подать
+                        заявку</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacts Section -->
+    <section id="contacts" class="py-16 bg-gray-900 text-white">
+        <div class="container mx-auto px-4">
+            <h3 class="text-3xl font-bold mb-12 text-center section-title">Контакты</h3>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div>
+                    <h4 class="text-2xl font-bold mb-6">Адрес и карта проезда</h4>
+
+                    <div class="mb-6">
+                        <p class="mb-2">Московский Политех, корпус №1</p>
+                        <p class="mb-2">ул. Автозаводская, 16</p>
+                        <p>Метро "Автозаводская"</p>
+                    </div>
+
+                    <div class="map-container">
+                        <iframe
+                                src="https://yandex.ru/map-widget/v1/?ll=37.646251%2C55.704461&z=17.86"
+                                frameborder="0"
+                                style="position:absolute;top:0;left:0;width:100%;height:100%;"
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-2xl font-bold mb-6">Форма обратной связи</h4>
+
+                    <form id="contact-form" class="space-y-4">
+                        <div>
+                            <label for="name" class="block mb-1">Ваше имя</label>
+                            <input type="text" id="name"
+                                   class="w-full px-4 py-2 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-700">
+                        </div>
+                        <div>
+                            <label for="email" class="block mb-1">Email</label>
+                            <input type="email" id="email"
+                                   class="w-full px-4 py-2 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-700">
+                        </div>
+                        <div>
+                            <label for="subject" class="block mb-1">Тема</label>
+                            <select id="subject"
+                                    class="w-full px-4 py-2 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-700">
+                                <option value="">Выберите тему</option>
+                                <option value="study">Обучение</option>
+                                <option value="cooperation">Сотрудничество</option>
+                                <option value="project">Проекты</option>
+                                <option value="other">Другое</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="message" class="block mb-1">Сообщение</label>
+                            <textarea id="message" rows="4"
+                                      class="w-full px-4 py-2 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-700"></textarea>
+                        </div>
+                        <button type="submit"
+                                class="bg-primary-700 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-medium transition w-full">
+                            Отправить
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block footer %}
+    <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div>
+            <h5 class="text-white font-bold mb-4">Лаборатория</h5>
+            <ul class="space-y-2">
+                <li><a href="#about" class="hover:text-accent transition">О нас</a></li>
+                <li><a href="#activities" class="hover:text-accent transition">Направления</a></li>
+                <li><a href="#resources" class="hover:text-accent transition">Ресурсы</a></li>
+                <li><a href="#projects" class="hover:text-accent transition">Проекты</a></li>
+            </ul>
+        </div>
+        <div>
+            <h5 class="text-white font-bold mb-4">Образование</h5>
+            <ul class="space-y-2">
+                <li><a href="#students" class="hover:text-accent transition">Студентам</a></li>
+                <li><a href="#" class="hover:text-accent transition">Программы</a></li>
+                <li><a href="#" class="hover:text-accent transition">Мероприятия</a></li>
+                <li><a href="#" class="hover:text-accent transition">Стажировки</a></li>
+            </ul>
+        </div>
+        <div>
+            <h5 class="text-white font-bold mb-4">Контакты</h5>
+            <ul class="space-y-2">
+                <li class="flex items-start">
+                    <i class="fas fa-map-marker-alt mt-1 mr-2"></i>
+                    <span>ул. Большая Семёновская, 38</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-phone-alt mt-1 mr-2"></i>
+                    <span>+7 (495) 223-05-23</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-envelope mt-1 mr-2"></i>
+                    <span>cybersec@mospolytech.ru</span>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h5 class="text-white font-bold mb-4">Социальные сети</h5>
+            <div class="flex space-x-4">
+                <a href="#" class="text-2xl hover:text-white transition"><i class="fab fa-vk"></i></a>
+                <a href="#" class="text-2xl hover:text-white transition"><i class="fab fa-telegram"></i></a>
+                <a href="#" class="text-2xl hover:text-white transition"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="text-2xl hover:text-white transition"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
