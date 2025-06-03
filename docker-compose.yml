@@ -8,10 +8,10 @@ services:
     env_file:
       - .env
     environment:
-      MYSQL_DATABASE: islab_db
-      MYSQL_USER: islab_user
-      MYSQL_PASSWORD: islab_pass
-      MYSQL_ROOT_PASSWORD: root_pass
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
       - "3306:3306"
     volumes:

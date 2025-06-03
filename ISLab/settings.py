@@ -1,17 +1,17 @@
-import os
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-2hiiwx3pud%my%@)*9_f^y@=w#f!u8$$!9nb5ngibx9***4i&l'
+SECRET_KEY = config('DJANGO_SECRET_KEY', default='django-insecure-2hiiwx3pud%my%@)*9_f^y@=w#f!u8$$!9nb5ngibx9***4i&l')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DJANGO_DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS', default='*').split(',')
 
 
 # Application definition
@@ -66,11 +66,11 @@ WSGI_APPLICATION = 'ISlab.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('MYSQL_DATABASE'),
-        'USER': os.getenv('MYSQL_USER'),
-        'PASSWORD': os.getenv('MYSQL_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT'),
+        'NAME': config('MYSQL_DATABASE', default='islab_db'),
+        'USER': config('MYSQL_USER', default='islab_user'),
+        'PASSWORD': config('MYSQL_PASSWORD', default='islab_pass'),
+        'HOST': config('DB_HOST', default='localhost'),
+        'PORT': config('DB_PORT', default='3306'),
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
         },
