@@ -58,7 +58,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'ISlab.wsgi.application'
+WSGI_APPLICATION = 'ISLab.wsgi.application'
 
 
 # Database
