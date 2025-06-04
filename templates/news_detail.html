@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static textblocks %}
 {% block title %}Новость | Лаборатория ИБ{% endblock %}
 
 {% block content %}
@@ -147,15 +147,15 @@
             <ul class="space-y-2">
                 <li class="flex items-start">
                     <i class="fas fa-map-marker-alt mt-1 mr-2"></i>
-                    <span>ул. Большая Семёновская, 38</span>
+                    <span>{% textblock "contact_address" %}</span>
                 </li>
                 <li class="flex items-start">
                     <i class="fas fa-phone-alt mt-1 mr-2"></i>
-                    <span>+7 (495) 223-05-23</span>
+                    <span>{% textblock "contact_phone" %}</span>
                 </li>
                 <li class="flex items-start">
                     <i class="fas fa-envelope mt-1 mr-2"></i>
-                    <span>cybersec@mospolytech.ru</span>
+                    <span>{% textblock "contact_email" %}</span>
                 </li>
             </ul>
         </div>

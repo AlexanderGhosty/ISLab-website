@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
-{% load static %}
+{% load static textblocks %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,7 +45,7 @@
         {% endblock %}
     </div>
     <div class="container mx-auto px-4 text-center text-sm">
-        <p>© 2025 Лаборатория информационной безопасности Московского Политеха</p>
+        <p>{% textblock "footer_copy" %}</p>
     </div>
 </footer>
 
