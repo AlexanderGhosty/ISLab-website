@@ -64,6 +64,7 @@ $ source venv/bin/activate  # Windows: venv\Scripts\activate
 # 3. Ставим зависимости
 $ pip install -r requirements.txt
 ```
+В список зависимостей входит пакет `django-admin-interface`, обеспечивающий оформление панели администратора.
 
 Создайте базу данных и пользователя MySQL:
 
@@ -193,6 +194,12 @@ $ docker-compose down -v
 * **Публикации**: поля *Название*, *Авторы*, *Журнал*, *Ссылка*.
 * **Сотрудники**: фотография, контакты, краткая биография.
 * **Проекты**: период выполнения, цель, результаты, заказчик.
+
+### Настройка темы администратора
+
+Панель управления оформлена с помощью [django-admin-interface](https://github.com/fabiocaccamo/django-admin-interface).
+Приложения `admin_interface` и `colorfield` уже добавлены в `INSTALLED_APPS`, а заголовки панели задаются в [`ISLab/urls.py`](ISLab/urls.py).
+При необходимости можно изменить шаблон `templates/admin/base_site.html` и стили `static/css/admin_custom.css`.
 
 ## Тестирование
 

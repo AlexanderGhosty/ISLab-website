@@ -7,6 +7,9 @@ pillow>=10.0.0                  # Для ImageField
 django-tailwind>=3.5.1          # Tailwind CSS через Django
 django-browser-reload>=1.11.0   # Автоперезагрузка страниц
 
+# Админ‑тема
+django-admin-interface>=0.30
+
 # Статические файлы
 whitenoise>=6.5.0               # Для обслуживания static в production
 

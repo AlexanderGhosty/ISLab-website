@@ -1,4 +1,8 @@
 from django.contrib import admin
+
+admin.site.site_header = "ISLab Administration"
+admin.site.site_title = "ISLab Admin Portal"
+admin.site.index_title = "Welcome to ISLab Admin"
 from django.urls import path, include
 from django.views.generic import TemplateView
 from rest_framework.routers import DefaultRouter
