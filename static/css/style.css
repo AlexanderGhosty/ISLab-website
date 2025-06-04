@@ -113,3 +113,15 @@
 .prose {
     max-width: 100%;
 }
+
+/* ── History section toggle ─────────────────── */
+.history-more {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+
+.history-more.open {
+    opacity: 1;
+}

@@ -439,6 +439,21 @@
             initProjectsPagination();
             initStaffPagination();
 
+            const historyBtn  = document.getElementById('toggle-history');
+            const historyMore = document.getElementById('history-more');
+            if (historyBtn && historyMore) {
+                historyBtn.addEventListener('click', () => {
+                    const opened = historyMore.classList.toggle('open');
+                    if (opened) {
+                        historyMore.style.maxHeight = historyMore.scrollHeight + 'px';
+                        historyBtn.textContent = 'Скрыть';
+                    } else {
+                        historyMore.style.maxHeight = null;
+                        historyBtn.textContent = 'Подробнее';
+                    }
+                });
+            }
+
             // Load first pages for all sections
             loadNews(); // This will load first page and show "Показать больше" button if needed
             loadPubs(); // This will load first page and show "Загрузить больше" button if needed
