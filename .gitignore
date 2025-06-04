@@ -175,3 +175,5 @@ cython_debug/
 
 /staticfiles/
 .idea
+
+media/

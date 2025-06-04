@@ -140,17 +140,19 @@
         function renderStaff() {
             const staffContainer = document.getElementById('staff-container');
             staffContainer.innerHTML = '';
-            
+
             staffData.forEach(staff => {
                 const staffElement = document.createElement('div');
                 staffElement.className = 'bg-white rounded-lg shadow-md overflow-hidden staff-card relative';
                 staffElement.innerHTML = `
-                    <img src="${staff.image}" alt="${staff.name}" class="w-full h-64 object-cover">
+                    <img src="${staff.image}" alt="${staff.name}" class="w-full aspect-[3/4] object-contain bg-gray-100 
+                    rounded-t-lg transition-transform duration-300 ease-in-out hover:scale-105" onerror="this.src='/static/img/staff_placeholder.webp'">
                     <div class="p-4">
                         <h5 class="font-bold text-lg">${staff.name}</h5>
                         <p class="text-blue-900 text-sm mb-2">${staff.position}</p>
                     </div>
-                    <div class="absolute inset-0 bg-blue-900 bg-opacity-80 text-white p-6 opacity-0 staff-overlay transition duration-300 flex flex-col justify-center">
+                    <div class="absolute inset-0 bg-blue-900 bg-opacity-80 text-white p-6 opacity-0 staff-overlay transition 
+                    duration-300 flex flex-col justify-center">
                         <h5 class="font-bold text-xl mb-2">${staff.name}</h5>
                         <p class="text-blue-200 text-sm mb-2">${staff.position}</p>
                         <p class="text-sm mb-4">${staff.bio}</p>
