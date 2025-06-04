@@ -68,10 +68,6 @@
             });
         }
 
-        // Load more news
-        document.getElementById('load-more-news')
-        .addEventListener('click', () => newsUrl && loadNews(newsUrl));
-
         let newsUrl = '/api/news/';   // текущая страница
         let newsData = [];
 
@@ -84,10 +80,60 @@
                     renderNews(newsData);
 
                     newsUrl = data.next;   // DRF даёт next=null, когда страницы кончились
-                    document.getElementById('load-more-news')
-                            .style.display = newsUrl ? 'inline-block' : 'none';
+                    updateNewsButtons();
                 })
                 .catch(console.error);
+        }
+
+        function updateNewsButtons() {
+            const loadMoreBtn = document.getElementById('load-more-news');
+            const hideBtn = document.getElementById('hide-news');
+
+            if (loadMoreBtn && hideBtn) {
+                if (newsUrl) {
+                    // There are more pages to load
+                    loadMoreBtn.style.display = 'inline-block';
+                    hideBtn.style.display = 'none';
+                } else {
+                    // All pages loaded, show hide button only if we have more than 4 items
+                    if (newsData.length > 4) {
+                        loadMoreBtn.style.display = 'none';
+                        hideBtn.style.display = 'inline-block';
+                    } else {
+                        // Only one page, hide both buttons
+                        loadMoreBtn.style.display = 'none';
+                        hideBtn.style.display = 'none';
+                    }
+                }
+            }
+        }
+
+        function initNewsPagination() {
+            // Load more news
+            const loadMoreBtn = document.getElementById('load-more-news');
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', () => {
+                    if (newsUrl) {
+                        loadNews(newsUrl);
+                    }
+                });
+            }
+
+            // Hide news (show only first page)
+            const hideBtn = document.getElementById('hide-news');
+            if (hideBtn) {
+                hideBtn.addEventListener('click', () => {
+                    // Reset to first page only
+                    newsData = newsData.slice(0, 4); // Keep only first 4 items (first page)
+                    renderNews(newsData);
+                    newsUrl = '/api/news/?page=2'; // Set to second page for next load
+                    updateNewsButtons();
+                });
+            }
+
+            // Initially hide both buttons until first load
+            if (loadMoreBtn) loadMoreBtn.style.display = 'none';
+            if (hideBtn) hideBtn.style.display = 'none';
         }
 
         // ────────────── PUBS ──────────────
@@ -112,10 +158,6 @@
             });
         }
 
-        // Load more pubs
-        document.getElementById('load-more-pubs')
-        .addEventListener('click', () => pubsUrl && loadPubs(pubsUrl));
-
         let pubsUrl = '/api/publications/';   // текущая страница публикаций
         let pubsData = [];
 
@@ -128,30 +170,80 @@
                     renderPublications(pubsData);
 
                     pubsUrl = data.next;   // DRF вернёт null, когда страниц не останется
-                    document.getElementById('load-more-pubs')
-                            .style.display = pubsUrl ? 'inline-block' : 'none';
+                    updatePubsButtons();
                 })
                 .catch(console.error);
+        }
+
+        function updatePubsButtons() {
+            const loadMoreBtn = document.getElementById('load-more-pubs');
+            const hideBtn = document.getElementById('hide-pubs');
+
+            if (loadMoreBtn && hideBtn) {
+                if (pubsUrl) {
+                    // There are more pages to load
+                    loadMoreBtn.style.display = 'inline-block';
+                    hideBtn.style.display = 'none';
+                } else {
+                    // All pages loaded, show hide button only if we have more than 4 items
+                    if (pubsData.length > 4) {
+                        loadMoreBtn.style.display = 'none';
+                        hideBtn.style.display = 'inline-block';
+                    } else {
+                        // Only one page, hide both buttons
+                        loadMoreBtn.style.display = 'none';
+                        hideBtn.style.display = 'none';
+                    }
+                }
+            }
+        }
+
+        function initPubsPagination() {
+            // Load more pubs
+            const loadMoreBtn = document.getElementById('load-more-pubs');
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', () => {
+                    if (pubsUrl) {
+                        loadPubs(pubsUrl);
+                    }
+                });
+            }
+
+            // Hide pubs (show only first page)
+            const hideBtn = document.getElementById('hide-pubs');
+            if (hideBtn) {
+                hideBtn.addEventListener('click', () => {
+                    // Reset to first page only
+                    pubsData = pubsData.slice(0, 4); // Keep only first 4 items (first page)
+                    renderPublications(pubsData);
+                    pubsUrl = '/api/publications/?page=2'; // Set to second page for next load
+                    updatePubsButtons();
+                });
+            }
+
+            // Initially hide both buttons until first load
+            if (loadMoreBtn) loadMoreBtn.style.display = 'none';
+            if (hideBtn) hideBtn.style.display = 'none';
         }
 
         // ────────────── STAFF ──────────────
 
         // Render staff
-        function renderStaff() {
+        function renderStaff(staffToRender) {
             const staffContainer = document.getElementById('staff-container');
             staffContainer.innerHTML = '';
 
-            staffData.forEach(staff => {
+            staffToRender.forEach(staff => {
                 const staffElement = document.createElement('div');
                 staffElement.className = 'bg-white rounded-lg shadow-md overflow-hidden staff-card relative';
                 staffElement.innerHTML = `
-                    <img src="${staff.image}" alt="${staff.name}" class="w-full aspect-[3/4] object-contain bg-gray-100 
+                    <img src="${staff.image}" alt="${staff.name}" class="w-full aspect-[3/4] object-contain bg-gray-100
                     rounded-t-lg transition-transform duration-300 ease-in-out hover:scale-105" onerror="this.src='/static/img/staff_placeholder.webp'">
                     <div class="p-4">
                         <h5 class="font-bold text-lg">${staff.name}</h5>
                         <p class="text-blue-900 text-sm mb-2">${staff.position}</p>
                     </div>
-                    <div class="absolute inset-0 bg-blue-900 bg-opacity-80 text-white p-6 opacity-0 staff-overlay transition 
+                    <div class="absolute inset-0 bg-blue-900 bg-opacity-80 text-white p-6 opacity-0 staff-overlay transition
                     duration-300 flex flex-col justify-center">
                         <h5 class="font-bold text-xl mb-2">${staff.name}</h5>
                         <p class="text-blue-200 text-sm mb-2">${staff.position}</p>
@@ -167,18 +259,73 @@
             });
         }
 
-        let staffUrl  = "/api/staff/";
+        let staffUrl = '/api/staff/';   // текущая страница
         let staffData = [];
 
-        function loadStaff() {
-        fetch('/api/staff/')
-            .then(r => r.json())
-            .then(data => {
-                staffData = data;
-                renderStaff(staffData);
-            })
-            .catch(console.error);
-    }
+        function loadStaff(url = staffUrl) {
+            fetch(url)
+                .then(r => r.json())
+                .then(data => {
+                    const list = Array.isArray(data) ? data : data.results || [];
+                    staffData = [...staffData, ...list];
+                    renderStaff(staffData);
+
+                    staffUrl = data.next;   // DRF даёт next=null, когда страницы кончились
+                    updateStaffButtons();
+                })
+                .catch(console.error);
+        }
+
+        function updateStaffButtons() {
+            const loadMoreBtn = document.getElementById('load-more-staff');
+            const hideBtn = document.getElementById('hide-staff');
+
+            if (loadMoreBtn && hideBtn) {
+                if (staffUrl) {
+                    // There are more pages to load
+                    loadMoreBtn.style.display = 'inline-block';
+                    hideBtn.style.display = 'none';
+                } else {
+                    // All pages loaded, show hide button only if we have more than 4 items
+                    if (staffData.length > 4) {
+                        loadMoreBtn.style.display = 'none';
+                        hideBtn.style.display = 'inline-block';
+                    } else {
+                        // Only one page, hide both buttons
+                        loadMoreBtn.style.display = 'none';
+                        hideBtn.style.display = 'none';
+                    }
+                }
+            }
+        }
+
+        function initStaffPagination() {
+            // Load more staff
+            const loadMoreBtn = document.getElementById('load-more-staff');
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', () => {
+                    if (staffUrl) {
+                        loadStaff(staffUrl);
+                    }
+                });
+            }
+
+            // Hide staff (show only first page)
+            const hideBtn = document.getElementById('hide-staff');
+            if (hideBtn) {
+                hideBtn.addEventListener('click', () => {
+                    // Reset to first page only
+                    staffData = staffData.slice(0, 4); // Keep only first 4 items (first page)
+                    renderStaff(staffData);
+                    staffUrl = '/api/staff/?page=2'; // Set to second page for next load
+                    updateStaffButtons();
+                });
+            }
+
+            // Initially show load more button, hide hide button
+            if (loadMoreBtn) loadMoreBtn.style.display = 'none'; // Will be shown after first load if needed
+            if (hideBtn) hideBtn.style.display = 'none';
+        }
 
     // ────────────── PROJECTS ──────────────
         let projectsUrl  = "/api/projects/";
@@ -211,15 +358,61 @@
                     renderProjects(projectsData);
 
                     projectsUrl = data.next;   // DRF pagination
-                    document.getElementById("load-more-projects")
-                            .style.display = projectsUrl ? "inline-block" : "none";
+                    updateProjectsButtons();
                 })
                 .catch(console.error);
         }
 
-        
-        document.getElementById("load-more-projects")
-                .addEventListener("click", () => projectsUrl && loadProjects());
+        function updateProjectsButtons() {
+            const loadMoreBtn = document.getElementById('load-more-projects');
+            const hideBtn = document.getElementById('hide-projects');
+
+            if (loadMoreBtn && hideBtn) {
+                if (projectsUrl) {
+                    // There are more pages to load
+                    loadMoreBtn.style.display = 'inline-block';
+                    hideBtn.style.display = 'none';
+                } else {
+                    // All pages loaded, show hide button only if we have more than 4 items
+                    if (projectsData.length > 4) {
+                        loadMoreBtn.style.display = 'none';
+                        hideBtn.style.display = 'inline-block';
+                    } else {
+                        // Only one page, hide both buttons
+                        loadMoreBtn.style.display = 'none';
+                        hideBtn.style.display = 'none';
+                    }
+                }
+            }
+        }
+
+        function initProjectsPagination() {
+            // Load more projects
+            const loadMoreBtn = document.getElementById('load-more-projects');
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', () => {
+                    if (projectsUrl) {
+                        loadProjects(projectsUrl);
+                    }
+                });
+            }
+
+            // Hide projects (show only first page)
+            const hideBtn = document.getElementById('hide-projects');
+            if (hideBtn) {
+                hideBtn.addEventListener('click', () => {
+                    // Reset to first page only
+                    projectsData = projectsData.slice(0, 4); // Keep only first 4 items (first page)
+                    renderProjects(projectsData);
+                    projectsUrl = '/api/projects/?page=2'; // Set to second page for next load
+                    updateProjectsButtons();
+                });
+            }
+
+            // Initially hide both buttons until first load
+            if (loadMoreBtn) loadMoreBtn.style.display = 'none';
+            if (hideBtn) hideBtn.style.display = 'none';
+        }
 
         /* ───────────────── Tabs «Проекты / Публикации» ───────────────── */
         document.querySelectorAll('#projpub-tabs .tab-btn').forEach(btn => {
@@ -240,8 +433,15 @@
         
 
         document.addEventListener('DOMContentLoaded', function() {
-            loadStaff();
-            loadNews();
-            loadPubs();
-            loadProjects();
+            // Initialize all pagination functions first, then load first pages
+            initNewsPagination();
+            initPubsPagination();
+            initProjectsPagination();
+            initStaffPagination();
+
+            // Load first pages for all sections
+            loadNews(); // This will load first page and show "Показать больше" button if needed
+            loadPubs(); // This will load first page and show "Загрузить больше" button if needed
+            loadProjects(); // This will load first page and show "Показать больше" button if needed
+            loadStaff(); // This will load first page and show "Показать больше" button if needed
         });

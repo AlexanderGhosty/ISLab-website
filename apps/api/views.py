@@ -39,11 +39,9 @@ class PublicationViewSet(viewsets.ReadOnlyModelViewSet):
 
 class StaffViewSet(viewsets.ReadOnlyModelViewSet):
     """
-    GET /api/staff/       → список сотрудников
+    GET /api/staff/       → список сотрудников (пагинируется)
     GET /api/staff/{id}/  → один сотрудник
     """
     queryset = Staff.objects.all()
     serializer_class = StaffSerializer
     permission_classes = [permissions.AllowAny]
-
-    pagination_class = None
