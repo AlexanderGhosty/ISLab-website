@@ -438,60 +438,31 @@
             <div class="text-center mb-16">
                 <span class="inline-block px-4 py-1 bg-accent-light/20 text-accent rounded-full text-sm font-medium mb-4">Исследования</span>
                 <h3 class="text-3xl font-bold mb-4 section-title inline-block font-heading">Проекты и публикации</h3>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Наши последние исследовательские работы и
-                    реализованные
-                    проекты в области кибербезопасности.</p>
             </div>
-            <div class="max-w-4xl mx-auto">
 
-                <!-- Tabs navigation -->
-                <div id="projpub-tabs" class="flex justify-center mb-8 text-sm sm:text-base">
-                    <button data-tab="projects"
-                            class="tab-btn px-4 py-2 font-medium border-b-2 border-primary-900
-                                text-primary-900">
-                        Проекты
+            <div class="max-w-4xl mx-auto space-y-10 text-gray-700">
+                <p>В учебно-научных лабораториях развернут современный комплекс средств обеспечения информационной безопасности, включающий специализированные программно-аппаратные решения для мониторинга, анализа и защиты информационных систем.</p>
+                <p>Среди компонентов инфраструктуры лаборатории выделяются продукты компании НПО «Эшелон»:</p>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li>Система комплексного анализа защищенности «Сканер-ВС» – автоматизированное решение, предназначенное для проведения регулярного аудита безопасности вычислительных систем. Данный инструмент обеспечивает выявление уязвимостей в сетевой инфраструктуре, операционных системах и прикладном программном обеспечении, а также формирует детализированные отчеты с рекомендациями по устранению обнаруженных рисков.</li>
+                    <li>SIEM-система КОМРАД (Security Information and Event Management) – платформа для централизованного сбора, корреляции и анализа событийной информации, поступающей от различных источников (сетевых устройств, серверов, средств защиты информации). Система обеспечивает обнаружение аномальной активности, реагирование на инциденты информационной безопасности и поддержку механизмов соответствия требованиям регуляторных стандартов.</li>
+                </ul>
+                <p>Развернутые решения позволяют проводить исследования в области анализа защищенности, моделирования кибератак, разработки методов противодействия угрозам, а также обеспечивают практическую подготовку специалистов в сфере информационной безопасности.</p>
+
+                <h4 class="text-2xl font-bold text-center mt-8">Научные публикации</h4>
+                <p class="text-center text-gray-600">Список опубликованных работ сотрудников лаборатории</p>
+
+                <div class="grid md:grid-cols-2 gap-4" id="publications-container"></div>
+
+                <div class="mt-6 text-center">
+                    <button id="load-more-pubs"
+                            class="bg-primary-900 text-white px-6 py-2 rounded-lg hover:bg-primary-700 transition">
+                        Показать больше
                     </button>
-                    <button data-tab="pubs"
-                            class="tab-btn px-4 py-2 font-medium border-b-2 border-transparent
-                                text-gray-500 hover:text-primary-900">
-                        Публикации
+                    <button id="hide-pubs"
+                            class="bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-500 transition ml-4 hidden">
+                        Скрыть
                     </button>
-                </div>
-
-                <div class="space-y-10">
-                    <!-- ── Projects panel ───────────────────────── -->
-                    <div id="projects-panel">
-                        <div class="space-y-6" id="projects-container"></div>
-
-                        <div class="mt-6 text-center">
-                            <button id="load-more-projects"
-                                    class="bg-primary-900 text-white px-6 py-2 rounded-lg
-                                    hover:bg-primary-700 transition">
-                                Показать больше
-                            </button>
-                            <button id="hide-projects"
-                                    class="bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-500 transition ml-4 hidden">
-                                Скрыть
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- ── Publications panel ───────────────────── -->
-                    <div id="pubs-panel" class="hidden">
-                        <div class="space-y-4" id="publications-container"></div>
-
-                        <div class="mt-6 text-center">
-                            <button id="load-more-pubs"
-                                    class="bg-primary-900 text-white px-6 py-2 rounded-lg
-                                    hover:bg-primary-700 transition">
-                                Загрузить больше
-                            </button>
-                            <button id="hide-pubs"
-                                    class="bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-500 transition ml-4 hidden">
-                                Скрыть
-                            </button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

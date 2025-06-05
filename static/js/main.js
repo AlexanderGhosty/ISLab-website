@@ -368,124 +368,12 @@
             if (hideBtn) hideBtn.style.display = 'none';
         }
 
-    // ────────────── PROJECTS ──────────────
-        let projectsUrl  = "/api/projects/";
-        let projectsData = [];
-
-        function renderProjects(list, animate = false) {
-            const box = document.getElementById("projects-container");
-            const render = () => {
-                box.innerHTML = "";
-                list.forEach(p => {
-                    box.insertAdjacentHTML("beforeend", `
-                        <div class="bg-white p-6 rounded-lg shadow-sm">
-                            <h5 class="font-bold text-lg mb-2">${p.title}</h5>
-                            <p class="text-gray-700 mb-2"><strong>Цель:</strong> ${p.goal}</p>
-                            ${p.result ? `<p class="text-gray-700 mb-2"><strong>Результат:</strong> ${p.result}</p>` : ""}
-                            <div class="flex justify-between items-center text-sm text-gray-500">
-                                <span>${p.start_year}${p.end_year ? "–" + p.end_year : ""}</span>
-                                <span>${p.sponsor || ""}</span>
-                            </div>
-                        </div>
-                    `);
-                });
-            };
-
-            if (animate) {
-                animateHeight(box, render);
-            } else {
-                render();
-            }
-        }
-
-        function loadProjects(url = projectsUrl) {
-            fetch(url)
-                .then(r => r.json())
-                .then(data => {
-                    const items = Array.isArray(data) ? data : (data.results || []);
-                    projectsData = [...projectsData, ...items];
-                    renderProjects(projectsData, true);
-
-                    projectsUrl = data.next;   // DRF pagination
-                    updateProjectsButtons();
-                })
-                .catch(console.error);
-        }
-
-        function updateProjectsButtons() {
-            const loadMoreBtn = document.getElementById('load-more-projects');
-            const hideBtn = document.getElementById('hide-projects');
-
-            if (loadMoreBtn && hideBtn) {
-                if (projectsUrl) {
-                    // There are more pages to load
-                    loadMoreBtn.style.display = 'inline-block';
-                    hideBtn.style.display = 'none';
-                } else {
-                    // All pages loaded, show hide button only if we have more than 4 items
-                    if (projectsData.length > 4) {
-                        loadMoreBtn.style.display = 'none';
-                        hideBtn.style.display = 'inline-block';
-                    } else {
-                        // Only one page, hide both buttons
-                        loadMoreBtn.style.display = 'none';
-                        hideBtn.style.display = 'none';
-                    }
-                }
-            }
-        }
-
-        function initProjectsPagination() {
-            // Load more projects
-            const loadMoreBtn = document.getElementById('load-more-projects');
-            if (loadMoreBtn) {
-                loadMoreBtn.addEventListener('click', () => {
-                    if (projectsUrl) {
-                        loadProjects(projectsUrl);
-                    }
-                });
-            }
-
-            // Hide projects (show only first page)
-            const hideBtn = document.getElementById('hide-projects');
-            if (hideBtn) {
-                hideBtn.addEventListener('click', () => {
-                    // Reset to first page only
-                    projectsData = projectsData.slice(0, 4); // Keep only first 4 items (first page)
-                    renderProjects(projectsData, true);
-                    projectsUrl = '/api/projects/?page=2'; // Set to second page for next load
-                    updateProjectsButtons();
-                });
-            }
-
-            // Initially hide both buttons until first load
-            if (loadMoreBtn) loadMoreBtn.style.display = 'none';
-            if (hideBtn) hideBtn.style.display = 'none';
-        }
-
-        /* ───────────────── Tabs «Проекты / Публикации» ───────────────── */
-        document.querySelectorAll('#projpub-tabs .tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-            // визуальное состояние
-            document.querySelectorAll('#projpub-tabs .tab-btn').forEach(b => {
-                b.classList.toggle('border-primary-900', b === btn);
-                b.classList.toggle('text-primary-900',  b === btn);
-                b.classList.toggle('text-gray-500',     b !== btn);
-            });
-        
-            // show/hide panels
-            const showProjects = btn.dataset.tab === 'projects';
-            document.getElementById('projects-panel').classList.toggle('hidden', !showProjects);
-            document.getElementById('pubs-panel').classList.toggle   ('hidden',  showProjects);
-            });
-        });
         
 
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize all pagination functions first, then load first pages
             initNewsPagination();
             initPubsPagination();
-            initProjectsPagination();
             initStaffPagination();
 
             const historyBtn  = document.getElementById('toggle-history');
@@ -506,6 +394,5 @@
             // Load first pages for all sections
             loadNews(); // This will load first page and show "Показать больше" button if needed
             loadPubs(); // This will load first page and show "Загрузить больше" button if needed
-            loadProjects(); // This will load first page and show "Показать больше" button if needed
             loadStaff(); // This will load first page and show "Показать больше" button if needed
         });
