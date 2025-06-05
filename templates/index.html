@@ -433,65 +433,130 @@
     </section>
 
     <!-- Projects and Publications -->
-    <section id="projects" class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <span class="inline-block px-4 py-1 bg-accent-light/20 text-accent rounded-full text-sm font-medium mb-4">Исследования</span>
-                <h3 class="text-3xl font-bold mb-4 section-title inline-block font-heading">Проекты и публикации</h3>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Наши последние исследовательские работы и
-                    реализованные
-                    проекты в области кибербезопасности.</p>
-            </div>
-            <div class="max-w-4xl mx-auto">
+    <section id="projects" class="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute top-10 left-10 w-32 h-32 rounded-full bg-accent blur-3xl animate-pulse-slow"></div>
+            <div class="absolute bottom-20 right-20 w-24 h-24 rounded-full bg-primary-700 blur-2xl animate-pulse-slow"></div>
+            <div class="absolute top-1/2 left-1/4 w-16 h-16 rounded-full bg-accent-light blur-xl animate-float"></div>
+        </div>
 
-                <!-- Tabs navigation -->
-                <div id="projpub-tabs" class="flex justify-center mb-8 text-sm sm:text-base">
-                    <button data-tab="projects"
-                            class="tab-btn px-4 py-2 font-medium border-b-2 border-primary-900
-                                text-primary-900">
-                        Проекты
-                    </button>
-                    <button data-tab="pubs"
-                            class="tab-btn px-4 py-2 font-medium border-b-2 border-transparent
-                                text-gray-500 hover:text-primary-900">
-                        Публикации
-                    </button>
+        <div class="container mx-auto px-4 relative z-10">
+            <!-- Header -->
+            <div class="text-center mb-20">
+                <div class="inline-flex items-center justify-center mb-6">
+                    <span class="inline-block px-6 py-2 bg-gradient-to-r from-accent-light/30 to-accent/30 backdrop-blur-sm text-accent rounded-full text-sm font-medium border border-accent/20 shadow-lg">
+                        <i class="fas fa-flask mr-2"></i>Исследования
+                    </span>
+                </div>
+                <h3 class="text-4xl md:text-5xl font-bold mb-6 section-title inline-block font-heading bg-gradient-to-r from-primary-900 to-primary-700 bg-clip-text text-transparent">
+                    Проекты и публикации
+                </h3>
+                <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                    Наши последние исследовательские работы и реализованные проекты в области кибербезопасности
+                </p>
+            </div>
+
+            <!-- Content Cards -->
+            <div class="max-w-6xl mx-auto space-y-8 mb-16">
+                <!-- Infrastructure Overview Card -->
+                <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-200/50 p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-accent to-accent-light rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-shield-alt text-white text-xl"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold text-primary-900">Инфраструктура лаборатории</h4>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed text-lg mb-8">
+                        В учебно-научных лабораториях развернут современный комплекс средств обеспечения информационной безопасности, 
+                        включающий специализированные программно-аппаратные решения для мониторинга, анализа и защиты информационных систем.
+                        Среди компонентов инфраструктуры лаборатории выделяются продукты компании НПО «Эшелон»:
+                    </p>
+
+                    <!-- Equipment Details -->
+                    <div class="space-y-6">
+                        <div class="bg-gray-50/50 rounded-xl p-3">
+                            <div class="flex items-start mb-3">
+                                <h6 class="text-lg font-bold text-primary-900">Система комплексного анализа защищенности «Сканер-ВС»</h6>
+                            </div>
+                            <p class="text-gray-700 leading-relaxed mb-3">
+                                Автоматизированное решение, предназначенное для проведения регулярного аудита безопасности 
+                                вычислительных систем. Данный инструмент обеспечивает выявление уязвимостей в сетевой инфраструктуре, 
+                                операционных системах и прикладном программном обеспечении, а также формирует детализированные отчеты 
+                                с рекомендациями по устранению обнаруженных рисков.
+                            </p>
+                        </div>
+
+                        <div class="bg-gray-50/50 rounded-xl p-3">
+                            <div class="flex items-start mb-3">
+                                <h6 class="text-lg font-bold text-primary-900">SIEM-система КОМРАД</h6>
+                            </div>
+                            <p class="text-gray-700 leading-relaxed mb-3">
+                                Платформа для централизованного сбора, корреляции и анализа событийной информации, поступающей от 
+                                различных источников (сетевых устройств, серверов, средств защиты информации). Система обеспечивает 
+                                обнаружение аномальной активности, реагирование на инциденты информационной безопасности и поддержку 
+                                механизмов соответствия требованиям регуляторных стандартов.
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="space-y-10">
-                    <!-- ── Projects panel ───────────────────────── -->
-                    <div id="projects-panel">
-                        <div class="space-y-6" id="projects-container"></div>
-
-                        <div class="mt-6 text-center">
-                            <button id="load-more-projects"
-                                    class="bg-primary-900 text-white px-6 py-2 rounded-lg
-                                    hover:bg-primary-700 transition">
-                                Показать больше
-                            </button>
-                            <button id="hide-projects"
-                                    class="bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-500 transition ml-4 hidden">
-                                Скрыть
-                            </button>
+                <!-- Research Applications Card -->
+                <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-200/50 p-8 hover:shadow-2xl 
+                transition-all duration-300 hover:-translate-y-1">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-accent to-accent-light rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-microscope text-white text-xl"></i>
                         </div>
+                        <h4 class="text-2xl font-bold text-primary-900">Исследовательские возможности</h4>
                     </div>
+                    <p class="text-gray-700 leading-relaxed text-lg">
+                        Развернутые решения позволяют проводить исследования в области анализа защищенности, моделирования кибератак, разработки методов противодействия угрозам, а также обеспечивают практическую подготовку специалистов в сфере информационной безопасности.
+                    </p>
+                </div>
+            </div>
 
-                    <!-- ── Publications panel ───────────────────── -->
-                    <div id="pubs-panel" class="hidden">
-                        <div class="space-y-4" id="publications-container"></div>
-
-                        <div class="mt-6 text-center">
-                            <button id="load-more-pubs"
-                                    class="bg-primary-900 text-white px-6 py-2 rounded-lg
-                                    hover:bg-primary-700 transition">
-                                Загрузить больше
-                            </button>
-                            <button id="hide-pubs"
-                                    class="bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-500 transition ml-4 hidden">
-                                Скрыть
-                            </button>
+            <!-- Publications Section -->
+            <div class="max-w-6xl mx-auto">
+                <!-- Publications Header -->
+                <div class="text-center mb-12">
+                    <div class="inline-flex items-center justify-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-accent to-accent-light rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-book-open text-white text-xl"></i>
                         </div>
+                        <h4 class="text-3xl font-bold text-primary-900">Научные публикации</h4>
                     </div>
+                    <p class="text-lg text-gray-600">Список опубликованных работ сотрудников лаборатории</p>
+                    <div class="w-24 h-1 bg-gradient-to-r from-accent to-accent-light rounded-full mx-auto mt-4"></div>
+                </div>
+
+                <!-- Publications Grid -->
+                <div class="grid md:grid-cols-2 gap-6 mb-8" id="publications-container"></div>
+
+                <!-- Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <button id="load-more-pubs"
+                            class="group relative px-8 py-3 bg-gradient-to-r from-accent to-accent-light 
+                            text-gray rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-300 
+                            hover:-translate-y-1 overflow-hidden">
+                        <span class="relative z-10 flex items-center">
+                            <i class="fas fa-plus mr-2"></i>
+                            Показать больше
+                        </span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary-700 to-accent opacity-0 
+                        group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </button>
+                    <button id="hide-pubs"
+                            class="group relative px-8 py-3 bg-gradient-to-r from-gray-600 to-gray-500 text-white 
+                            rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 
+                            overflow-hidden ml-0 sm:ml-4 hidden">
+                        <span class="relative z-10 flex items-center">
+                            <i class="fas fa-eye-slash mr-2"></i>
+                            Скрыть
+                        </span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-gray-500 to-gray-400 opacity-0 
+                        group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </button>
                 </div>
             </div>
         </div>
