@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from rest_framework import viewsets, permissions
 
+from .pagination import NewsPagination
+
 from .serializers import NewsSerializer, ProjectSerializer, PublicationSerializer, StaffSerializer
 from apps.news.models import News
 from apps.projects.models import Project
@@ -16,6 +18,7 @@ class NewsViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = News.objects.all().order_by("-date")
     serializer_class = NewsSerializer
     permission_classes = [permissions.AllowAny]
+    pagination_class = NewsPagination
 
 
 class ProjectViewSet(viewsets.ReadOnlyModelViewSet):

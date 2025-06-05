@@ -195,6 +195,7 @@
             fetch(url)
                 .then(r => r.json())
                 .then(data => {
+                    console.log('PUBLICATION DATA', data);
                     const list = Array.isArray(data) ? data : data.results || [];
                     pubsData = [...pubsData, ...list];
                     renderPublications(pubsData, true);
