@@ -73,14 +73,22 @@
                 newsContainer.innerHTML = '';
                 newsToRender.forEach(news => {
                     const newsElement = document.createElement('div');
-                    newsElement.className = 'bg-white rounded-lg shadow-md overflow-hidden news-card transition duration-300';
+                    newsElement.className = 'bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-200/50 overflow-hidden news-card hover:shadow-2xl transition-all duration-300 hover:-translate-y-1';
                     newsElement.innerHTML = `
                         <img src="${news.image}" alt="${news.title}" class="w-full aspect-[4/3] object-cover">
                         <div class="p-6">
-                            <div class="text-sm text-gray-500 mb-2">${news.date}</div>
-                            <h4 class="font-bold text-lg mb-2">${news.title}</h4>
-                            <p class="text-gray-700 mb-4">${news.excerpt}</p>
-                            <a href="/news/${news.id}/" class="text-blue-900 font-medium hover:underline">Подробнее</a>
+                            <div class="flex items-center mb-3">
+                                <div class="w-2 h-2 bg-accent rounded-full mr-2"></div>
+                                <div class="text-sm text-gray-500">${news.date}</div>
+                            </div>
+                            <h4 class="font-bold text-xl mb-3 text-primary-900 leading-tight">${news.title}</h4>
+                            <p class="text-gray-700 mb-6 leading-relaxed">${news.excerpt}</p>
+                            <div class="pt-4 border-t border-gray-100">
+                                <a href="/news/${news.id}/" class="inline-flex items-center text-gray hover:text-accent-light font-medium transition-colors duration-200">
+                                    <i class="fas fa-arrow-right mr-2"></i>
+                                    Подробнее
+                                </a>
+                            </div>
                         </div>
                     `;
                     newsContainer.appendChild(newsElement);
