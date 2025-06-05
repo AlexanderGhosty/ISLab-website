@@ -520,8 +520,9 @@
             <div class="max-w-6xl mx-auto">
                 <!-- Publications Header -->
                 <div class="text-center mb-12">
-                    <div class="inline-flex items-center justify-center mb-4">
-                        <div class="w-12 h-12 bg-gradient-to-r from-accent to-accent-light rounded-xl flex items-center justify-center mr-4">
+                    <!-- Mobile: Icon above heading, Desktop: Icon beside heading -->
+                    <div class="flex flex-col sm:flex-row sm:inline-flex items-center justify-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-accent to-accent-light rounded-xl flex items-center justify-center mb-3 sm:mb-0 sm:mr-4">
                             <i class="fas fa-book-open text-white text-xl"></i>
                         </div>
                         <h4 class="text-3xl font-bold text-primary-900">Научные публикации</h4>
@@ -563,65 +564,130 @@
     </section>
 
     <!-- For Students -->
-    <section id="students" class="py-16">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <span class="inline-block px-4 py-1 bg-accent-light/20 text-accent rounded-full text-sm font-medium mb-4">Обучение</span>
-                <h3 class="text-3xl font-bold mb-4 section-title inline-block font-heading">Для студентов</h3>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Присоединяйтесь, создадим будущее ИБ вместе.</p>
+    <section id="students" class="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-100 relative overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute top-10 left-10 w-32 h-32 rounded-full bg-accent blur-3xl animate-pulse-slow"></div>
+            <div class="absolute bottom-20 right-20 w-24 h-24 rounded-full bg-primary-700 blur-2xl animate-pulse-slow"></div>
+            <div class="absolute top-1/2 left-1/4 w-16 h-16 rounded-full bg-accent-light blur-xl animate-float"></div>
+        </div>
+
+        <div class="container mx-auto px-4 relative z-10">
+            <!-- Header -->
+            <div class="text-center mb-20">
+                <div class="inline-flex items-center justify-center mb-6">
+                    <span class="inline-block px-6 py-2 bg-gradient-to-r from-accent-light/30 to-accent/30 backdrop-blur-sm text-accent rounded-full text-sm font-medium border border-accent/20 shadow-lg">
+                        <i class="fas fa-graduation-cap mr-2"></i>Обучение
+                    </span>
+                </div>
+                <h3 class="text-4xl md:text-5xl font-bold mb-6 section-title inline-block font-heading bg-gradient-to-r from-primary-900 to-primary-700 bg-clip-text text-transparent">
+                    Для студентов
+                </h3>
+                <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                    Присоединяйтесь к нашей команде. Создадим будущее информационной безопасности вместе.
+                </p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8 mb-12">
-                <div>
-                    <h4 class="text-2xl font-bold mb-6">Возможности для студентов</h4>
+            <!-- Content Cards -->
+            <div class="max-w-6xl mx-auto space-y-8 mb-16">
+                <!-- Student Opportunities Card -->
+                <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-200/50 p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-accent to-accent-light rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-user-graduate text-white text-xl"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold text-primary-900">Возможности для студентов</h4>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed text-lg mb-8">
+                        Лаборатория предоставляет уникальные возможности для студентов, желающих развиваться в области информационной безопасности.
+                        Мы предлагаем практический опыт работы с современными технологиями и методиками защиты информации.
+                    </p>
 
-                    <div class="space-y-6">
-                        <div class="flex items-start">
-                            <div class="bg-accent-light p-3 rounded-full mr-4">
-                                <i class="fas fa-microscope text-primary-900"></i>
+                    <!-- Opportunities Details -->
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-gray-50/50 rounded-xl p-6">
+                            <div class="flex items-center mb-4">
+                                <h6 class="text-lg font-bold text-primary-900">Лабораторные практикумы</h6>
                             </div>
-                            <div>
-                                <h5 class="font-bold text-lg mb-2">Лабораторные практикумы</h5>
-                                <p class="text-gray-700">Участие в лабораторных практикумах и научных исследованиях по защите данных от утечек и несанкционированного доступа. Студенты могут работать лаборантами и вносить вклад в реальные проекты.</p>
-                            </div>
+                            <p class="text-gray-700 leading-relaxed">
+                                Участие в лабораторных практикумах и научных исследованиях по защите данных от утечек и несанкционированного доступа.
+                                Студенты могут работать лаборантами и вносить вклад в реальные проекты.
+                            </p>
                         </div>
-                        <div class="flex items-start">
-                            <div class="bg-accent-light p-3 rounded-full mr-4">
-                                <i class="fas fa-shield-alt text-primary-900"></i>
+
+                        <div class="bg-gray-50/50 rounded-xl p-6">
+                            <div class="flex items-center mb-4">
+                                <h6 class="text-lg font-bold text-primary-900">Современное оборудование</h6>
                             </div>
-                            <div>
-                                <h5 class="font-bold text-lg mb-2">Современное оборудование</h5>
-                                <p class="text-gray-700">Освоение современного оборудования и методик ФСТЭК для работы в области информационной безопасности с использованием передовых технологий защиты данных.</p>
-                            </div>
+                            <p class="text-gray-700 leading-relaxed">
+                                Освоение современного оборудования и методик ФСТЭК для работы в области информационной безопасности
+                                с использованием передовых технологий защиты данных.
+                            </p>
                         </div>
-                        <div class="flex items-start">
-                            <div class="bg-accent-light p-3 rounded-full mr-4">
-                                <i class="fas fa-handshake text-primary-900"></i>
+
+                        <div class="bg-gray-50/50 rounded-xl p-6">
+                            <div class="flex items-center mb-4">
+                                <h6 class="text-lg font-bold text-primary-900">Партнерство с ИТ-компаниями</h6>
                             </div>
-                            <div>
-                                <h5 class="font-bold text-lg mb-2">Партнерство с ИТ-компаниями</h5>
-                                <p class="text-gray-700">Сотрудничество с ведущими ИТ-компаниями: Метрика Б, Logical IT, НПО «Эшелон», Security Vision, ОКБ САПР для производственной практики и стажировок.</p>
-                            </div>
+                            <p class="text-gray-700 leading-relaxed">
+                                Сотрудничество с ведущими ИТ-компаниями: Метрика Б, Logical IT, НПО «Эшелон», Security Vision,
+                                ОКБ САПР для производственной практики и стажировок.
+                            </p>
                         </div>
-                        <div class="flex items-start">
-                            <div class="bg-accent-light p-3 rounded-full mr-4">
-                                <i class="fas fa-briefcase text-primary-900"></i>
+
+                        <div class="bg-gray-50/50 rounded-xl p-6">
+                            <div class="flex items-center mb-4">
+                                <h6 class="text-lg font-bold text-primary-900">Карьерные возможности</h6>
                             </div>
-                            <div>
-                                <h5 class="font-bold text-lg mb-2">Карьерные возможности</h5>
-                                <p class="text-gray-700">Стажировки с гибким графиком и возможности трудоустройства, позволяющие студентам развивать навыки и строить карьеру в сфере информационной безопасности.</p>
-                            </div>
+                            <p class="text-gray-700 leading-relaxed">
+                                Стажировки с гибким графиком и возможности трудоустройства, позволяющие студентам развивать навыки
+                                и строить карьеру в сфере информационной безопасности.
+                            </p>
                         </div>
                     </div>
                 </div>
 
-                <div>
-                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80"
-                         alt="Студенты Лаборатории" class="rounded-lg shadow-lg w-full">
+                <!-- Student Experience Card -->
+                <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-200/50 p-8 hover:shadow-2xl
+                transition-all duration-300 hover:-translate-y-1">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-accent to-accent-light rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-rocket text-white text-xl"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold text-primary-900">Практический опыт</h4>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <p class="text-gray-700 leading-relaxed text-lg mb-6">
+                                Наши студенты получают практический опыт работы с реальными задачами информационной безопасности,
+                                участвуют в исследовательских проектах и имеют возможность применить полученные знания на практике.
+                            </p>
+                            <div class="space-y-4">
+                                <div class="flex items-center">
+                                    <div class="w-2 h-2 bg-accent rounded-full mr-3"></div>
+                                    <span class="text-gray-700">Работа с современными SIEM-системами</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-2 h-2 bg-accent rounded-full mr-3"></div>
+                                    <span class="text-gray-700">Анализ уязвимостей и пентестинг</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-2 h-2 bg-accent rounded-full mr-3"></div>
+                                    <span class="text-gray-700">Разработка систем защиты</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-2 h-2 bg-accent rounded-full mr-3"></div>
+                                    <span class="text-gray-700">Участие в научных публикациях</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80"
+                                 alt="Студенты Лаборатории" class="rounded-xl shadow-lg w-full aspect-[4/3] object-cover">
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            
         </div>
     </section>
 
