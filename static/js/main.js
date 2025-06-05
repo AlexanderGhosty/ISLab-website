@@ -8,18 +8,21 @@
         });
 
         // Mobile menu toggle
-        document.querySelector('header button').addEventListener('click', function() {
-            const nav = document.querySelector('header nav');
-            nav.classList.toggle('hidden');
-            nav.classList.toggle('block');
-            nav.classList.toggle('absolute');
-            nav.classList.toggle('top-16');
-            nav.classList.toggle('left-0');
-            nav.classList.toggle('right-0');
-            nav.classList.toggle('bg-white');
-            nav.classList.toggle('p-4');
-            nav.classList.toggle('shadow-md');
-        });
+        const burger = document.querySelector('header button');
+        if (burger) {
+            burger.addEventListener('click', function() {
+                const nav = document.querySelector('header nav');
+                nav.classList.toggle('hidden');
+                nav.classList.toggle('block');
+                nav.classList.toggle('absolute');
+                nav.classList.toggle('top-16');
+                nav.classList.toggle('left-0');
+                nav.classList.toggle('right-0');
+                nav.classList.toggle('bg-white');
+                nav.classList.toggle('p-4');
+                nav.classList.toggle('shadow-md');
+            });
+        }
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -118,8 +121,8 @@
                     loadMoreBtn.style.display = 'inline-block';
                     hideBtn.style.display = 'none';
                 } else {
-                    // All pages loaded, show hide button only if we have more than 4 items
-                    if (newsData.length > 4) {
+                    // All pages loaded, show hide button only if we have more than 6 items
+                    if (newsData.length > 6) {
                         loadMoreBtn.style.display = 'none';
                         hideBtn.style.display = 'inline-block';
                     } else {
@@ -147,7 +150,7 @@
             if (hideBtn) {
                 hideBtn.addEventListener('click', () => {
                     // Reset to first page only
-                    newsData = newsData.slice(0, 4); // Keep only first 4 items (first page)
+                    newsData = newsData.slice(0, 6); // Keep only first 6 items (first page)
                     renderNews(newsData, true);
                     newsUrl = '/api/news/?page=2'; // Set to second page for next load
                     updateNewsButtons();
