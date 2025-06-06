@@ -6,6 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Лаборатория ИБ | Московский Политех{% endblock %}</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/polytech_logo_main_RGB_small.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/polytech_logo_main_RGB_small.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/polytech_logo_main_RGB_small.png' %}">
+    <meta name="msapplication-TileImage" content="{% static 'img/polytech_logo_main_RGB_small.png' %}">
+    <meta name="msapplication-TileColor" content="#0A132E">
+    <meta name="theme-color" content="#0A132E">
+
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -40,10 +50,12 @@
 
 <!-- Footer -->
 <footer class="bg-gray-800 text-gray-400 py-8">
-    {% block footer %}
-    {% endblock %}
+    <div class="container mx-auto px-4">
+        {% block footer %}
+        {% endblock %}
+    </div>
     <div class="container mx-auto px-4 text-center text-sm">
-        <p>© 2025 Лаборатория информационной безопасности Московского Политеха</p>
+        <p>© 2025 Факультет Информационных технологий Московского Политеха</p>
     </div>
 </footer>
 

@@ -8,18 +8,21 @@
         });
 
         // Mobile menu toggle
-        document.querySelector('header button').addEventListener('click', function() {
-            const nav = document.querySelector('header nav');
-            nav.classList.toggle('hidden');
-            nav.classList.toggle('block');
-            nav.classList.toggle('absolute');
-            nav.classList.toggle('top-16');
-            nav.classList.toggle('left-0');
-            nav.classList.toggle('right-0');
-            nav.classList.toggle('bg-white');
-            nav.classList.toggle('p-4');
-            nav.classList.toggle('shadow-md');
-        });
+        const burger = document.querySelector('header button');
+        if (burger) {
+            burger.addEventListener('click', function() {
+                const nav = document.querySelector('header nav');
+                nav.classList.toggle('hidden');
+                nav.classList.toggle('block');
+                nav.classList.toggle('absolute');
+                nav.classList.toggle('top-16');
+                nav.classList.toggle('left-0');
+                nav.classList.toggle('right-0');
+                nav.classList.toggle('bg-white');
+                nav.classList.toggle('p-4');
+                nav.classList.toggle('shadow-md');
+            });
+        }
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -45,32 +48,59 @@
             });
         });
 
+         function animateHeight(element, renderCallback) {
+            const start = element.offsetHeight;
+            renderCallback();
+            const end = element.scrollHeight;
+            element.classList.add('expandable');
+            element.style.maxHeight = start + 'px';
+            requestAnimationFrame(() => {
+                element.style.maxHeight = end + 'px';
+            });
+            element.addEventListener('transitionend', function handler() {
+                element.classList.remove('expandable');
+                element.style.maxHeight = '';
+                element.removeEventListener('transitionend', handler);
+            });
+        }
+    
         // ────────────── NEWS ──────────────
 
         // Render news
-        function renderNews(newsToRender) {
+         function renderNews(newsToRender, animate = false) {
             const newsContainer = document.getElementById('news-container');
-            newsContainer.innerHTML = '';
-            
-            newsToRender.forEach(news => {
-                const newsElement = document.createElement('div');
-                newsElement.className = 'bg-white rounded-lg shadow-md overflow-hidden news-card transition duration-300';
-                newsElement.innerHTML = `
-                    <img src="${news.image}" alt="${news.title}" class="w-full aspect-[4/3] object-cover">
-                    <div class="p-6">
-                        <div class="text-sm text-gray-500 mb-2">${news.date}</div>
-                        <h4 class="font-bold text-lg mb-2">${news.title}</h4>
-                        <p class="text-gray-700 mb-4">${news.excerpt}</p>
-                        <a href="/news/${news.id}/" class="text-blue-900 font-medium hover:underline">Подробнее</a>
-                    </div>
-                `;
-                newsContainer.appendChild(newsElement);
-            });
-        }
+            const render = () => {
+                newsContainer.innerHTML = '';
+                newsToRender.forEach(news => {
+                    const newsElement = document.createElement('div');
+                    newsElement.className = 'bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-200/50 overflow-hidden news-card hover:shadow-2xl transition-all duration-300 hover:-translate-y-1';
+                    newsElement.innerHTML = `
+                        <img src="${news.image}" alt="${news.title}" class="w-full aspect-[4/3] object-cover">
+                        <div class="p-6">
+                            <div class="flex items-center mb-3">
+                                <div class="w-2 h-2 bg-accent rounded-full mr-2"></div>
+                                <div class="text-sm text-gray-500">${news.date}</div>
+                            </div>
+                            <h4 class="font-bold text-xl mb-3 text-primary-900 leading-tight">${news.title}</h4>
+                            <p class="text-gray-700 mb-6 leading-relaxed">${news.excerpt}</p>
+                            <div class="pt-4 border-t border-gray-100">
+                                <a href="/news/${news.id}/" class="inline-flex items-center text-gray hover:text-accent-light font-medium transition-colors duration-200">
+                                    <i class="fas fa-arrow-right mr-2"></i>
+                                    Подробнее
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    newsContainer.appendChild(newsElement);
+                });
+            };
 
-        // Load more news
-        document.getElementById('load-more-news')
-        .addEventListener('click', () => newsUrl && loadNews(newsUrl));
+            if (animate) {
+                animateHeight(newsContainer, render);
+            } else {
+                render();
+            }
+        }
 
         let newsUrl = '/api/news/';   // текущая страница
         let newsData = [];
@@ -81,40 +111,108 @@
                 .then(data => {
                     const list = Array.isArray(data) ? data : data.results || [];
                     newsData = [...newsData, ...list];
-                    renderNews(newsData);
+                    renderNews(newsData, true);
 
                     newsUrl = data.next;   // DRF даёт next=null, когда страницы кончились
-                    document.getElementById('load-more-news')
-                            .style.display = newsUrl ? 'inline-block' : 'none';
+                    updateNewsButtons();
                 })
                 .catch(console.error);
+        }
+
+        function updateNewsButtons() {
+            const loadMoreBtn = document.getElementById('load-more-news');
+            const hideBtn = document.getElementById('hide-news');
+
+            if (loadMoreBtn && hideBtn) {
+                if (newsUrl) {
+                    // There are more pages to load
+                    loadMoreBtn.style.display = 'inline-block';
+                    hideBtn.style.display = 'none';
+                } else {
+                    // All pages loaded, show hide button only if we have more than 6 items
+                    if (newsData.length > 6) {
+                        loadMoreBtn.style.display = 'none';
+                        hideBtn.style.display = 'inline-block';
+                    } else {
+                        // Only one page, hide both buttons
+                        loadMoreBtn.style.display = 'none';
+                        hideBtn.style.display = 'none';
+                    }
+                }
+            }
+        }
+
+        function initNewsPagination() {
+            // Load more news
+            const loadMoreBtn = document.getElementById('load-more-news');
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', () => {
+                    if (newsUrl) {
+                        loadNews(newsUrl);
+                    }
+                });
+            }
+
+            // Hide news (show only first page)
+            const hideBtn = document.getElementById('hide-news');
+            if (hideBtn) {
+                hideBtn.addEventListener('click', () => {
+                    // Reset to first page only
+                    newsData = newsData.slice(0, 6); // Keep only first 6 items (first page)
+                    renderNews(newsData, true);
+                    newsUrl = '/api/news/?page=2'; // Set to second page for next load
+                    updateNewsButtons();
+                });
+            }
+
+            // Initially hide both buttons until first load
+            if (loadMoreBtn) loadMoreBtn.style.display = 'none';
+            if (hideBtn) hideBtn.style.display = 'none';
         }
 
         // ────────────── PUBS ──────────────
 
         // Render publications
-        function renderPublications(pubsToRender) {
+        function renderPublications(pubsToRender, animate = false) {
             const pubsContainer = document.getElementById('publications-container');
-            pubsContainer.innerHTML = '';
-            
-            pubsToRender.forEach(pub => {
-                const pubElement = document.createElement('div');
-                pubElement.className = 'bg-white p-4 rounded-lg shadow-sm publication-item transition';
-                pubElement.innerHTML = `
-                    <h5 class="font-bold mb-1">${pub.title}</h5>
-                    <p class="text-sm text-gray-600 mb-2">${pub.authors}</p>
-                    <p class="text-xs text-gray-500 mb-2">${pub.journal}</p>
-                    <a href="${pub.link}" class="text-blue-900 text-sm hover:underline inline-flex items-center">
-                        <i class="fas fa-download mr-1"></i> Скачать
-                    </a>
-                `;
-                pubsContainer.appendChild(pubElement);
-            });
-        }
+            const render = () => {
+                pubsContainer.innerHTML = '';
+                pubsToRender.forEach(pub => {
+                    const pubElement = document.createElement('div');
+                    pubElement.className = 'bg-white/90 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200/50 p-6 publication-item transition-all duration-300 hover:shadow-xl hover:-translate-y-2 group relative overflow-hidden';
+                    pubElement.innerHTML = `
+                        <!-- Gradient accent border -->
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent to-accent-light opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-        // Load more pubs
-        document.getElementById('load-more-pubs')
-        .addEventListener('click', () => pubsUrl && loadPubs(pubsUrl));
+                        <!-- Content -->
+                        <h5 class="font-bold text-lg mb-3 text-primary-900 leading-tight group-hover:text-primary-900 transition-colors">${pub.title}</h5>
+                        <p class="text-sm text-gray-600 mb-3 flex items-center">
+
+                            ${pub.authors}
+                        </p>
+                        <p class="text-xs text-gray-500 mb-4 flex items-center">
+                            <i class="fas fa-book mr-2 text-gray-400"></i>
+                            ${pub.journal}
+                        </p>
+
+                        <!-- Action button -->
+                        <div class="pt-4 border-t border-gray-100">
+                            <a href="${pub.link}" class="inline-flex items-center text-primary hover:text-accent-light text-sm font-medium transition-colors duration-200">
+                                <i class="fas fa-download mr-2"></i>
+                                Скачать
+                            </a>
+                        </div>
+                    `;
+                    pubsContainer.appendChild(pubElement);
+                });
+            };
+
+            if (animate) {
+                animateHeight(pubsContainer, render);
+            } else {
+                render();
+            }
+        }
 
         let pubsUrl = '/api/publications/';   // текущая страница публикаций
         let pubsData = [];
@@ -123,123 +221,201 @@
             fetch(url)
                 .then(r => r.json())
                 .then(data => {
+                    console.log('PUBLICATION DATA', data);
                     const list = Array.isArray(data) ? data : data.results || [];
                     pubsData = [...pubsData, ...list];
-                    renderPublications(pubsData);
+                    renderPublications(pubsData, true);
 
                     pubsUrl = data.next;   // DRF вернёт null, когда страниц не останется
-                    document.getElementById('load-more-pubs')
-                            .style.display = pubsUrl ? 'inline-block' : 'none';
+                    updatePubsButtons();
                 })
                 .catch(console.error);
+        }
+
+        function updatePubsButtons() {
+            const loadMoreBtn = document.getElementById('load-more-pubs');
+            const hideBtn = document.getElementById('hide-pubs');
+
+            if (loadMoreBtn && hideBtn) {
+                if (pubsUrl) {
+                    // There are more pages to load
+                    loadMoreBtn.style.display = 'inline-block';
+                    hideBtn.style.display = 'none';
+                } else {
+                    // All pages loaded, show hide button only if we have more than 4 items
+                    if (pubsData.length > 4) {
+                        loadMoreBtn.style.display = 'none';
+                        hideBtn.style.display = 'inline-block';
+                    } else {
+                        // Only one page, hide both buttons
+                        loadMoreBtn.style.display = 'none';
+                        hideBtn.style.display = 'none';
+                    }
+                }
+            }
+        }
+
+        function initPubsPagination() {
+            // Load more pubs
+            const loadMoreBtn = document.getElementById('load-more-pubs');
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', () => {
+                    if (pubsUrl) {
+                        loadPubs(pubsUrl);
+                    }
+                });
+            }
+
+            // Hide pubs (show only first page)
+            const hideBtn = document.getElementById('hide-pubs');
+            if (hideBtn) {
+                hideBtn.addEventListener('click', () => {
+                    // Reset to first page only
+                    pubsData = pubsData.slice(0, 4); // Keep only first 4 items (first page)
+                    renderPublications(pubsData, true);
+                    pubsUrl = '/api/publications/?page=2'; // Set to second page for next load
+                    updatePubsButtons();
+                });
+            }
+
+            // Initially hide both buttons until first load
+            if (loadMoreBtn) loadMoreBtn.style.display = 'none';
+            if (hideBtn) hideBtn.style.display = 'none';
         }
 
         // ────────────── STAFF ──────────────
 
         // Render staff
-        function renderStaff() {
+        function renderStaff(staffToRender, animate = false) {
             const staffContainer = document.getElementById('staff-container');
-            staffContainer.innerHTML = '';
-            
-            staffData.forEach(staff => {
-                const staffElement = document.createElement('div');
-                staffElement.className = 'bg-white rounded-lg shadow-md overflow-hidden staff-card relative';
-                staffElement.innerHTML = `
-                    <img src="${staff.image}" alt="${staff.name}" class="w-full h-64 object-cover">
-                    <div class="p-4">
-                        <h5 class="font-bold text-lg">${staff.name}</h5>
-                        <p class="text-blue-900 text-sm mb-2">${staff.position}</p>
-                    </div>
-                    <div class="absolute inset-0 bg-blue-900 bg-opacity-80 text-white p-6 opacity-0 staff-overlay transition duration-300 flex flex-col justify-center">
-                        <h5 class="font-bold text-xl mb-2">${staff.name}</h5>
-                        <p class="text-blue-200 text-sm mb-2">${staff.position}</p>
-                        <p class="text-sm mb-4">${staff.bio}</p>
-                        <div class="flex space-x-3">
-                            <a href="#" class="text-white hover:text-blue-200"><i class="fab fa-vk"></i></a>
-                            <a href="#" class="text-white hover:text-blue-200"><i class="fas fa-envelope"></i></a>
-                            <a href="#" class="text-white hover:text-blue-200"><i class="fas fa-phone-alt"></i></a>
+            const render = () => {
+                staffContainer.innerHTML = '';
+                staffToRender.forEach(staff => {
+                    const staffElement = document.createElement('div');
+                    staffElement.className = 'bg-white rounded-lg shadow-md overflow-hidden staff-card relative';
+                    staffElement.innerHTML = `
+                        <img src="${staff.image}" alt="${staff.name}" class="w-full aspect-[3/4] object-contain bg-gray-100
+                        rounded-t-lg transition-transform duration-300 ease-in-out hover:scale-105" onerror="this.src='/static/img/staff_placeholder.webp'">
+                        <div class="p-4">
+                            <h5 class="font-bold text-lg">${staff.name}</h5>
+                            <p class="text-blue-900 text-sm mb-2">${staff.position}</p>
+                                                </div>
+                        <div class="absolute inset-0 bg-blue-900 bg-opacity-80 text-white p-6 opacity-0 staff-overlay transition
+                        duration-300 flex flex-col justify-center">
+                            <h5 class="font-bold text-xl mb-2">${staff.name}</h5>
+                            <p class="text-blue-200 text-sm mb-2">${staff.position}</p>
+                            <p class="text-sm mb-4">${staff.bio}</p>
+                            <div class="flex space-x-3">
+                                <a href="#" class="text-white hover:text-blue-200"><i class="fab fa-vk"></i></a>
+                                <a href="#" class="text-white hover:text-blue-200"><i class="fas fa-envelope"></i></a>
+                                <a href="#" class="text-white hover:text-blue-200"><i class="fas fa-phone-alt"></i></a>
+                            </div>
                         </div>
-                    </div>
-                `;
-                staffContainer.appendChild(staffElement);
-            });
+                    `;
+                    staffContainer.appendChild(staffElement);
+                });
+            };
+
+            if (animate) {
+                animateHeight(staffContainer, render);
+            } else {
+                render();
+            }
         }
 
-        let staffUrl  = "/api/staff/";
+        let staffUrl = '/api/staff/';   // текущая страница
         let staffData = [];
 
-        function loadStaff() {
-        fetch('/api/staff/')
-            .then(r => r.json())
-            .then(data => {
-                staffData = data;
-                renderStaff(staffData);
-            })
-            .catch(console.error);
-    }
-
-    // ────────────── PROJECTS ──────────────
-        let projectsUrl  = "/api/projects/";
-        let projectsData = [];
-
-        function renderProjects(list) {
-            const box = document.getElementById("projects-container");
-            box.innerHTML = "";
-            list.forEach(p => {
-                box.insertAdjacentHTML("beforeend", `
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <h5 class="font-bold text-lg mb-2">${p.title}</h5>
-                        <p class="text-gray-700 mb-2"><strong>Цель:</strong> ${p.goal}</p>
-                        ${p.result ? `<p class="text-gray-700 mb-2"><strong>Результат:</strong> ${p.result}</p>` : ""}
-                        <div class="flex justify-between items-center text-sm text-gray-500">
-                            <span>${p.start_year}${p.end_year ? "–" + p.end_year : ""}</span>
-                            <span>${p.sponsor || ""}</span>
-                        </div>
-                    </div>
-                `);
-            });
-        }
-
-        function loadProjects(url = projectsUrl) {
+        function loadStaff(url = staffUrl) {
             fetch(url)
                 .then(r => r.json())
                 .then(data => {
-                    const items = Array.isArray(data) ? data : (data.results || []);
-                    projectsData = [...projectsData, ...items];
-                    renderProjects(projectsData);
+                    const list = Array.isArray(data) ? data : data.results || [];
+                    staffData = [...staffData, ...list];
+                    renderStaff(staffData, true);
 
-                    projectsUrl = data.next;   // DRF pagination
-                    document.getElementById("load-more-projects")
-                            .style.display = projectsUrl ? "inline-block" : "none";
+                    staffUrl = data.next;   // DRF даёт next=null, когда страницы кончились
+                    updateStaffButtons();
                 })
                 .catch(console.error);
         }
 
-        
-        document.getElementById("load-more-projects")
-                .addEventListener("click", () => projectsUrl && loadProjects());
+        function updateStaffButtons() {
+            const loadMoreBtn = document.getElementById('load-more-staff');
+            const hideBtn = document.getElementById('hide-staff');
 
-        /* ───────────────── Tabs «Проекты / Публикации» ───────────────── */
-        document.querySelectorAll('#projpub-tabs .tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-            // визуальное состояние
-            document.querySelectorAll('#projpub-tabs .tab-btn').forEach(b => {
-                b.classList.toggle('border-primary-900', b === btn);
-                b.classList.toggle('text-primary-900',  b === btn);
-                b.classList.toggle('text-gray-500',     b !== btn);
-            });
-        
-            // show/hide panels
-            const showProjects = btn.dataset.tab === 'projects';
-            document.getElementById('projects-panel').classList.toggle('hidden', !showProjects);
-            document.getElementById('pubs-panel').classList.toggle   ('hidden',  showProjects);
-            });
-        });
+            if (loadMoreBtn && hideBtn) {
+                if (staffUrl) {
+                    // There are more pages to load
+                    loadMoreBtn.style.display = 'inline-block';
+                    hideBtn.style.display = 'none';
+                } else {
+                    // All pages loaded, show hide button only if we have more than 4 items
+                    if (staffData.length > 4) {
+                        loadMoreBtn.style.display = 'none';
+                        hideBtn.style.display = 'inline-block';
+                    } else {
+                        // Only one page, hide both buttons
+                        loadMoreBtn.style.display = 'none';
+                        hideBtn.style.display = 'none';
+                    }
+                }
+            }
+        }
+
+        function initStaffPagination() {
+            // Load more staff
+            const loadMoreBtn = document.getElementById('load-more-staff');
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', () => {
+                    if (staffUrl) {
+                        loadStaff(staffUrl);
+                    }
+                });
+            }
+
+            // Hide staff (show only first page)
+            const hideBtn = document.getElementById('hide-staff');
+            if (hideBtn) {
+                hideBtn.addEventListener('click', () => {
+                    // Reset to first page only
+                    staffData = staffData.slice(0, 4); // Keep only first 4 items (first page)
+                    renderStaff(staffData, true);
+                    staffUrl = '/api/staff/?page=2'; // Set to second page for next load
+                    updateStaffButtons();
+                });
+            }
+
+            // Initially show load more button, hide hide button
+            if (loadMoreBtn) loadMoreBtn.style.display = 'none'; // Will be shown after first load if needed
+            if (hideBtn) hideBtn.style.display = 'none';
+        }
+    
         
 
         document.addEventListener('DOMContentLoaded', function() {
-            loadStaff();
-            loadNews();
-            loadPubs();
-            loadProjects();
+            // Initialize all pagination functions first, then load first pages
+            initNewsPagination();
+            initPubsPagination();
+            initStaffPagination();
+
+            const historyBtn  = document.getElementById('toggle-history');
+            const historyMore = document.getElementById('history-more');
+            if (historyBtn && historyMore) {
+                historyBtn.addEventListener('click', () => {
+                    const opened = historyMore.classList.toggle('open');
+                    if (opened) {
+                        historyMore.style.maxHeight = historyMore.scrollHeight + 'px';
+                        historyBtn.textContent = 'Скрыть';
+                    } else {
+                        historyMore.style.maxHeight = null;
+                        historyBtn.textContent = 'Подробнее';
+                    }
+                });
+            }
+
+            // Load first pages for all sections
+            loadNews(); // This will load first page and show "Показать больше" button if needed
+            loadPubs(); // This will load first page and show "Загрузить больше" button if needed
+            loadStaff(); // This will load first page and show "Показать больше" button if needed
         });
